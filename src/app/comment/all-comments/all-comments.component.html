@@ -1,0 +1,13 @@
+<div class="block">
+    <h3 class="text-center">Ajoutez un commentaire !</h3>
+    <div *ngFor="let datacomment of comments" class="block-comment">
+        <div *ngFor="let datauser of users">
+            <p *ngIf="datauser.id == datacomment.user">{{ datauser.username }}</p>
+        </div>
+        <p>{{ datacomment.description }}</p>
+    </div>
+   
+</div>
+
+
+
