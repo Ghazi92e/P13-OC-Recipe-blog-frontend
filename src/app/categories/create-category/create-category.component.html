@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="text-center">
+        <h2>Toutes les catégories</h2>
+        <div *ngFor="let data of allCategories" style="padding-bottom: 10px;">
+            {{ data.name }}
+            <button type="button" class="btn btn-danger btn-sm" (click)="deleteCategory(data.id)">supprimer la categorie</button>
+        </div>
+        <h2 style="margin-top: 50px;">Ajoutez une catégorie</h2>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <form [formGroup]="categoryForm" (ngSubmit)="getCategory()">
+                <div class="form-group">
+                    <label for="name" style="margin-bottom: 5px; margin-top: 20px;">Nom de la catégorie</label>
+                    <input type="title" class="form-control"  style="margin-bottom: 10px;" placeholder="Nom de catégorie" formControlName="name">
+                </div>
+                <div class="form-group" style="margin-top: 20px;">
+                    <input type="button" class="btn btn-primary" style="margin-bottom: 10px;" value="Ajouter la catégorie" type="submit">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
