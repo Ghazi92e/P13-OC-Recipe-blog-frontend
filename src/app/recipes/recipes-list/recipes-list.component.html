@@ -1,0 +1,22 @@
+<div class="container">
+    <h1 class="text-center">Les Recettes</h1>
+    <div class="row">
+        <div *ngFor="let datarecipes of recipes; let i = index" class="col-sm-4">
+            <div *ngFor="let datausers of allUsers">
+                <div *ngIf="datarecipes.user == datausers.id">
+                    {{ datausers.username }}
+                </div>
+            </div>
+            <div class="block-recipe" (click)="onViewRecipe(datarecipes.id)">
+                <img [src]=datarecipes.file style="width: 280px; height: 400px;"/>
+                <p>{{ datarecipes.id }}</p>
+                <p>{{ datarecipes.title }}</p>
+            </div>
+        </div>
+    </div>
+
+    <a class="btn btn-primary" href="/create-recipe" role="button">Ajouter une recette</a>
+</div>
+
+<app-all-comments [users]="allUsers"></app-all-comments>
+
