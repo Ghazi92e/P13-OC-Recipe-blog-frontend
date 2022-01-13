@@ -3,7 +3,7 @@ export class Recipe {
     title: string
     description: string
     category: number
-    file: string
+    file: number
     user: number
 
     constructor() {
@@ -11,7 +11,7 @@ export class Recipe {
         this.title = ''
         this.description = ''
         this.category = 0
-        this.file = ''
+        this.file = 0
         this.user = 0
     }
 }
