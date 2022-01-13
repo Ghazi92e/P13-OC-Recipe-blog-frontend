@@ -2,8 +2,8 @@
     background-color: #F2F2F2;
     padding-top: 20px;
     padding-left: 20px;
-    margin-right: 500px;
-    margin-left: 500px;
+    margin-right: 600px;
+    margin-left: 600px;
 }
 
 h3 {
@@ -13,5 +13,9 @@ h3 {
 
 .block {
     margin-top: 150px;
-    margin-bottom: 100px;
+    margin-bottom: 50px;
+}
+
+.card {
+    margin: auto;
 }

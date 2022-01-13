@@ -1,12 +1,21 @@
 <div class="block">
     <h3 class="text-center">Ajoutez un commentaire !</h3>
-    <div *ngFor="let datacomment of comments" class="block-comment">
-        <div *ngFor="let datauser of users">
-            <p *ngIf="datauser.id == datacomment.user">{{ datauser.username }}</p>
+    <div *ngFor="let datacomment of comments">
+        <div class="card text-dark bg-light mb-3" style="max-width: 26rem;">
+            <div *ngFor="let datauser of users">
+                <div class="card-header" *ngIf="datauser.id == datacomment.user">
+                    {{ datauser.username }}
+                </div>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ datacomment.description }}</p>
+                <p class="card-text text-end">{{ datacomment.created.split('T')[0] }}</p>
+            </div>
+            <div class="card-footer bg-transparent" *ngIf="user && user.id == datacomment.user">
+                <button type="button" class="btn btn-danger btn-sm card-text text-end" (click)="deleteComment(datacomment.id)">supprimer mon commentaire</button>
+            </div>
         </div>
-        <p>{{ datacomment.description }}</p>
     </div>
-   
 </div>
 
 
