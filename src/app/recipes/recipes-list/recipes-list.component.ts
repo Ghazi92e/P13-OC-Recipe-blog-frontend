@@ -4,6 +4,8 @@ import { UsersService } from '../../_services/users.service';
 import { Recipe } from '../../_models/Recipe.model';
 import { Users } from '../../_models/Users.model';
 import { RecipesService } from '../../_services/recipes.service';
+import { UploadfileService } from 'src/app/_services/uploadfile.service';
+import { FileUpload } from 'src/app/_models/Fileupload.model';
 
 @Component({
   selector: 'app-recipes-list',
@@ -15,11 +17,12 @@ export class RecipesListComponent implements OnInit {
   recipes: Recipe[] = []
   currentuser: any
   datauser = []
-  user: Users[] = []
+  user: Users
   allUsers: Users[] = []
+  allFileUpload: FileUpload[] = []
 
-  constructor(private recipesService: RecipesService, private userService: UsersService, private router: Router) {
-
+  constructor(private recipesService: RecipesService, private userService: UsersService, private router: Router, private uploadFileService: UploadfileService) {
+    this.user = { id: 0, username: '', password: '', email: '', file: 0}
   }
 
   ngOnInit(): void {
@@ -27,6 +30,11 @@ export class RecipesListComponent implements OnInit {
     this.recipesService.getAllRecipes().subscribe(data => {
       this.recipes = data
       // console.log(data)
+    })
+
+    this.uploadFileService.getFile().subscribe(data => {
+      this.allFileUpload = data
+      console.log(this.allFileUpload)
     })
 
     this.currentuser = localStorage.getItem('token');
@@ -38,8 +46,8 @@ export class RecipesListComponent implements OnInit {
     }
 
     this.userService.getCurrentUser(this.currentuser).subscribe(data => {
-      this.user = data
-      console.log(this.user[0])
+      this.user = data[0]
+      console.log(this.user)
     })
 
     this.userService.getAllUsers().subscribe(data => {

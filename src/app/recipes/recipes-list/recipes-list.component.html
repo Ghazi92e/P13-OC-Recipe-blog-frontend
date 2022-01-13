@@ -8,7 +8,11 @@
                 </div>
             </div>
             <div class="block-recipe" (click)="onViewRecipe(datarecipes.id)">
-                <img [src]=datarecipes.file style="width: 280px; height: 400px;"/>
+                <div *ngFor="let datafile of allFileUpload">
+                    <div *ngIf="datarecipes.file == datafile.id">
+                        <img [src]=datafile.file  style="width: 280px; height: 400px;"/>
+                    </div>
+                </div>
                 <p>{{ datarecipes.id }}</p>
                 <p>{{ datarecipes.title }}</p>
             </div>
@@ -16,7 +20,8 @@
     </div>
 
     <a class="btn btn-primary" href="/create-recipe" role="button">Ajouter une recette</a>
-</div>
 
-<app-all-comments [users]="allUsers"></app-all-comments>
+    <app-all-comments [users]="allUsers"></app-all-comments>
+    <app-create-comment [user]="user"></app-create-comment>
+</div>
 
