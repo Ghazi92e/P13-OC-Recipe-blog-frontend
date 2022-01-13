@@ -1,0 +1,7 @@
+    <h1 class="text-center">Mon compte</h1>
+    <div class="block-center">
+        <p> Username: {{ user.username }}</p>
+        <p> Email: {{ user.email }}</p>
+        <p>Photo de profil:</p>
+        <img [src]=fileupload.file style="max-width: 400px;" />
+    </div>
