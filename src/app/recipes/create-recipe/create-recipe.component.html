@@ -13,7 +13,7 @@
 
 
 
-<div class="row justify-content-center" style="margin-top: 150px;">
+<div class="row justify-content-center" style="margin-top: 100px;">
     <div class="col-6">
         <div class="authBlock">
             <h3>Ajoutez une recette</h3>
@@ -40,11 +40,13 @@
                     <input class="form-control" type="file" id="formFile" (change)="onChange($event)">
                 </div>
 
+                <img *ngIf="_recipe.file" [src]=_recipe.file style="max-width: 400px;" />
+
                 <div class="form-group" style="margin-top: 20px;">
-                    <input type="button" class="btn btn-primary" style="margin-bottom: 10px;" value="Ajouter ma recette" type="submit">
+                    <input type="button" class="btn btn-primary" style="margin-bottom: 5px;" value="Ajouter ma recette" type="submit">
                 </div>
             </form>
-            <a class="btn btn-primary" href="/create-category" role="button">Ajouter une catégorie</a>
+            <a class="btn btn-primary" href="/create-category" role="button" style="margin-bottom: 70px;">Ajouter une catégorie</a>
         </div>
     </div>
 </div>

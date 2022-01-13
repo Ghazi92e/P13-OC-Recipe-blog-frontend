@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from 'src/app/_models/Category.model';
+import { FileUpload } from 'src/app/_models/Fileupload.model';
 import { Users } from 'src/app/_models/Users.model';
 import { CategoryService } from 'src/app/_services/category.service';
+import { UploadfileService } from 'src/app/_services/uploadfile.service';
 import { UsersService } from 'src/app/_services/users.service';
 import Swal from 'sweetalert2';
 import { Recipe } from '../../_models/Recipe.model';
@@ -16,15 +18,21 @@ import { RecipesService } from '../../_services/recipes.service';
 })
 export class CreateRecipeComponent implements OnInit {
 
-  recipe: Recipe
+  _recipe: Recipe
+
+  @Input() set recipe(recipe: Recipe) {
+    this._recipe = recipe
+    this.initForm()
+  }
   recipeForm: FormGroup | any
   allCategories: Category[]
   currentuser: any
   user: Users[]
+  // selectedFiles: FileList | any;
+  currentFileUpload: FileUpload | any;
 
-
-  constructor(private formBuilder: FormBuilder, private router: Router, private recipeService: RecipesService, private categoryService: CategoryService, private userService: UsersService ) 
-  { this.recipe = {id: 0, title: '', description: '', file: '', category: 0, user: 0}, this.allCategories = [{id: 0, name: ''}], this.user = [{id: 0, username:'', email:'', password:''}] }
+  constructor(private formBuilder: FormBuilder, private router: Router, private recipeService: RecipesService, private categoryService: CategoryService, private userService: UsersService, private route: ActivatedRoute, private uploadFileService: UploadfileService ) 
+  { this._recipe = {id: 0, title: '', description: '', file: 0, category: 0, user: 0}, this.allCategories = [{id: 0, name: ''}], this.user = [{id: 0, username:'', email:'', password:'', file: 0}] }
 
   ngOnInit(): void {
     this.initForm()
@@ -38,12 +46,26 @@ export class CreateRecipeComponent implements OnInit {
   }
 
   initForm() {
-    this.recipeForm = this.formBuilder.group({
-      title: ['', Validators.required],
-      description: ['', Validators.required],
-      file: [''],
-      categories: ['', Validators.required],
-    });
+    if (this._recipe == null) {
+      this.recipeForm = this.formBuilder.group({
+        title: ['', Validators.required],
+        description: ['', Validators.required],
+        file: [''],
+        categories: ['', Validators.required],
+      });
+    } else {
+      if (this._recipe.file) {
+        this.uploadFileService.getSingleFile(this._recipe.file).subscribe(data => {
+          this._recipe.file = data.file
+        })
+      }
+      this.recipeForm = this.formBuilder.group({
+        title: [this._recipe.title, Validators.required],
+        description: [this._recipe.description, Validators.required],
+        file: [this._recipe.file],
+        categories: [this._recipe.category, Validators.required],
+      })
+    }
   }
 
   onChange(event: any) {
@@ -70,8 +92,8 @@ export class CreateRecipeComponent implements OnInit {
               Swal.fire('Erreur image', "Image trop petite", 'error');
             }
             else {
-              const file = event.target.files[0];      
-              this.recipeForm.get('file').setValue(file);
+              this.currentFileUpload = event.target.files[0];
+              this.upload()
             }
           };
         };
@@ -84,19 +106,55 @@ export class CreateRecipeComponent implements OnInit {
   }
 
   getRecipe() {
+    const title = this.recipeForm?.get('title')?.value;
+    const description = this.recipeForm?.get('description')?.value;
+    const category = this.recipeForm?.get('categories')?.value;
+    const user = this.user[0].id
+    const file = this.recipeForm?.get('file')?.value;
+
+    this._recipe = new Recipe()
+    this._recipe.title = title
+    this._recipe.description = description
+    this._recipe.category = category
+    this._recipe.user = user
+    if(this.currentFileUpload) {
+      this._recipe.file = this.currentFileUpload.id
+    } else {
+      this._recipe.file = file
+    }
+
+    if (this.route.snapshot.params['id']) {
+      const id = this.route.snapshot.params['id'];
+      this.recipeService.updateRecipe(id, this._recipe).subscribe(response => {
+        console.log(response)
+        console.log("recette update")
+        this.router.navigate(['recipes']);
+      },
+      error => {
+        console.log(error)
+      })
+    } else {
+      this.recipeService.createRecipe(this._recipe).subscribe( response => {
+        console.log(response);
+        console.log("recette crée");
+        this.router.navigate(['recipes']);
+      },
+      error => {
+        console.log(error)
+      })
+    }
+  }
+
+  upload() {
+    // const file = new FileUpload(this.currentFileUpload);
     const formData = new FormData();
-    formData.append('file', this.recipeForm.get('file').value);
-    formData.append('title', this.recipeForm.get('title').value);
-    formData.append('description', this.recipeForm.get('description').value);
-    formData.append('category', this.recipeForm.get('categories').value);
-    formData.append('user', this.user[0].id.toString());
-    
-    this.recipeService.createRecipe(formData).subscribe( response => {
-      console.log(response);
-      console.log("recette creer");
-      this.router.navigate(['recipes'])
-    },
-    error => {
+    formData.append('file', this.currentFileUpload)
+    console.log("je suis le currentFileUpload" + this.currentFileUpload.name)
+    this.uploadFileService.uploadFile(formData).subscribe(data => {
+      this.currentFileUpload = data
+      console.log(this.currentFileUpload.id)
+      console.log("file Uploaded")
+    }, error => {
       console.log(error)
     })
   }
