@@ -19,6 +19,9 @@ import { FooterComponent } from './footer/footer.component';
 import { CreateCommentComponent } from './comment/create-comment/create-comment.component';
 import { AllCommentsComponent } from './comment/all-comments/all-comments.component';
 import { CommentService } from './_services/comment.service';
+import { EditRecipeComponent } from './recipes/edit-recipe/edit-recipe.component';
+import { UploadfileService } from './_services/uploadfile.service';
+import { DashboardComponent } from './authentication/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -33,7 +36,9 @@ import { CommentService } from './_services/comment.service';
     CreateCategoryComponent,
     FooterComponent,
     CreateCommentComponent,
-    AllCommentsComponent
+    AllCommentsComponent,
+    EditRecipeComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +46,7 @@ import { CommentService } from './_services/comment.service';
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [RecipesService, UsersService, CategoryService, CommentService],
+  providers: [RecipesService, UsersService, CategoryService, CommentService, UploadfileService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
