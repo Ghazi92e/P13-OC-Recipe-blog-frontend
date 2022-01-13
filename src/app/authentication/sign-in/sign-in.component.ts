@@ -22,6 +22,7 @@ export class SignInComponent implements OnInit {
     username: '',
     password: '',
     email: '',
+    file: 1,
     }
   }
 

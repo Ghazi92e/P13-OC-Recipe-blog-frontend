@@ -22,6 +22,7 @@ export class SignUpComponent implements OnInit {
       username: '',
       password: '',
       email: '',
+      file: 1,
     }
   }
 
@@ -50,6 +51,7 @@ export class SignUpComponent implements OnInit {
     this.user.username = username
     this.user.email = email
     this.user.password = password
+    this.user.file = 1
     console.log(this.user)
     this.usersService.createUser(this.user).subscribe( response => {
       console.log(response);
