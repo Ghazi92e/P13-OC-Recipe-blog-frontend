@@ -21,7 +21,8 @@ export class DashboardComponent implements OnInit {
     username: '',
     password: '',
     email: '',
-    file: 1, }
+    file: 0,
+    }
 
     this.fileupload = { id: 0, file: ''}
   }
@@ -31,11 +32,10 @@ export class DashboardComponent implements OnInit {
     this.usersService.getCurrentUser(this.currentuser).subscribe(data => {
       this.user = data[0]
       console.log(this.user)
-    })
-
-    this.uploadFileService.getSingleFile(this.user.file).subscribe(data => {
-      this.fileupload = data
-      console.log("je suis le single file" + this.fileupload.file)
+      this.uploadFileService.getSingleFile(this.user.file).subscribe(data => {
+        this.fileupload = data
+        console.log("je suis le single file" + this.fileupload.file)
+      })
     })
   }
 
