@@ -8,6 +8,7 @@ import { SignUpComponent } from './authentication/sign-up/sign-up.component';
 import { SingleRecipeComponent } from './recipes/single-recipe/single-recipe.component';
 import { EditRecipeComponent } from './recipes/edit-recipe/edit-recipe.component';
 import { DashboardComponent } from './authentication/dashboard/dashboard.component';
+import { FavoriteRecipesComponent } from './favorite-recipes/favorite-recipes.component';
 
 const routes: Routes = [
   { path: '', component: RecipesListComponent },
@@ -18,7 +19,8 @@ const routes: Routes = [
   { path: 'recipe/view/:id', component: SingleRecipeComponent },
   { path: 'create-category', component: CreateCategoryComponent },
   { path: 'recipe/edit/:id', component: EditRecipeComponent },
-  { path: 'dashboard', component: DashboardComponent }
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'favoriterecipes', component: FavoriteRecipesComponent }
 ];
 
 @NgModule({
