@@ -40,7 +40,7 @@
                     <input class="form-control" type="file" id="formFile" (change)="onChange($event)">
                 </div>
 
-                <img *ngIf="_recipe.file" [src]=_recipe.file style="max-width: 400px;" />
+                <img *ngIf="recipeFile" [src]=recipeFile style="max-width: 400px;" />
 
                 <div class="form-group" style="margin-top: 20px;">
                     <input type="button" class="btn btn-primary" style="margin-bottom: 5px;" value="Ajouter ma recette" type="submit">

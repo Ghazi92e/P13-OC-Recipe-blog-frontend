@@ -30,9 +30,10 @@ export class CreateRecipeComponent implements OnInit {
   user: Users[]
   // selectedFiles: FileList | any;
   currentFileUpload: FileUpload | any;
+  recipeFile: any
 
   constructor(private formBuilder: FormBuilder, private router: Router, private recipeService: RecipesService, private categoryService: CategoryService, private userService: UsersService, private route: ActivatedRoute, private uploadFileService: UploadfileService ) 
-  { this._recipe = {id: 0, title: '', description: '', file: 0, category: 0, user: 0}, this.allCategories = [{id: 0, name: ''}], this.user = [{id: 0, username:'', email:'', password:'', file: 0}] }
+  { this._recipe = {id: 0, title: '', description: '', file: 0, category: 0, user: 0}, this.allCategories = [{id: 0, name: ''}], this.user = [{id: 0, username:'', email:'', password:'', file: 0 }] }
 
   ngOnInit(): void {
     this.initForm()
@@ -43,6 +44,7 @@ export class CreateRecipeComponent implements OnInit {
       this.user = data
       console.log(this.user[0].id)
     })
+
   }
 
   initForm() {
@@ -55,8 +57,9 @@ export class CreateRecipeComponent implements OnInit {
       });
     } else {
       if (this._recipe.file) {
+        console.log(this._recipe.file)
         this.uploadFileService.getSingleFile(this._recipe.file).subscribe(data => {
-          this._recipe.file = data.file
+          this.recipeFile = data.file
         })
       }
       this.recipeForm = this.formBuilder.group({
@@ -119,11 +122,18 @@ export class CreateRecipeComponent implements OnInit {
     this._recipe.user = user
     if(this.currentFileUpload) {
       this._recipe.file = this.currentFileUpload.id
+      console.log("getrecipe" + this._recipe.file)
     } else {
       this._recipe.file = file
     }
 
     if (this.route.snapshot.params['id']) {
+      // this.uploadFileService.deleteFile(this._recipe.file).subscribe( data => {
+      //   console.log(data)
+      // }, error => {
+      //   console.log(error)
+      // })
+      console.log("je suis le recipe file" + this._recipe.file)
       const id = this.route.snapshot.params['id'];
       this.recipeService.updateRecipe(id, this._recipe).subscribe(response => {
         console.log(response)
@@ -146,17 +156,23 @@ export class CreateRecipeComponent implements OnInit {
   }
 
   upload() {
+    console.log(this._recipe.file)
     // const file = new FileUpload(this.currentFileUpload);
     const formData = new FormData();
     formData.append('file', this.currentFileUpload)
     console.log("je suis le currentFileUpload" + this.currentFileUpload.name)
+    console.log("je suis l'id de l'image" + this.currentFileUpload.id)
     this.uploadFileService.uploadFile(formData).subscribe(data => {
       this.currentFileUpload = data
-      console.log(this.currentFileUpload.id)
+      console.log(this.currentFileUpload.file)
+      console.log(this._recipe.file)
       console.log("file Uploaded")
     }, error => {
       console.log(error)
     })
+
+    console.log(this._recipe.file)
+
   }
 
   getAllCategory() {
