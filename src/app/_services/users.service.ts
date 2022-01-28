@@ -4,7 +4,6 @@ import { Users } from '../_models/Users.model';
 
 const url = 'http://127.0.0.1:8000/api-users/'
 const user_auth = 'http://127.0.0.1:8000/api-token-auth/'
-
 @Injectable({
   providedIn: 'root'
 })
@@ -26,5 +25,17 @@ export class UsersService {
 
   getCurrentUser(user_token: string) {
     return this.http.get<Users[]>(`${url}?auth_token=${user_token}`);
+  }
+
+  getSingleUser(id: any) {
+    return this.http.get<Users>(`${url}${id}`);
+  }
+
+  getFavoriteRecipesUser(id: any) {
+    return this.http.get(`${url}${id}/favorite_recipes`);
+  }
+
+  deleteFavoriterecipeUser(id: any, data: any) {
+    return this.http.delete(`${url}${id}/favorite_recipes/`, data)
   }
 }
