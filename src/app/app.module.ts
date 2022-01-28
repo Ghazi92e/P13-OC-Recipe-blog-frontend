@@ -22,6 +22,8 @@ import { CommentService } from './_services/comment.service';
 import { EditRecipeComponent } from './recipes/edit-recipe/edit-recipe.component';
 import { UploadfileService } from './_services/uploadfile.service';
 import { DashboardComponent } from './authentication/dashboard/dashboard.component';
+import { FavoriteRecipesComponent } from './favorite-recipes/favorite-recipes.component';
+import { FavoriteRecipesService } from './_services/favorite-recipes.service';
 
 
 @NgModule({
@@ -38,7 +40,8 @@ import { DashboardComponent } from './authentication/dashboard/dashboard.compone
     CreateCommentComponent,
     AllCommentsComponent,
     EditRecipeComponent,
-    DashboardComponent
+    DashboardComponent,
+    FavoriteRecipesComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +49,7 @@ import { DashboardComponent } from './authentication/dashboard/dashboard.compone
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [RecipesService, UsersService, CategoryService, CommentService, UploadfileService],
+  providers: [RecipesService, UsersService, CategoryService, CommentService, UploadfileService, FavoriteRecipesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
