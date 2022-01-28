@@ -22,4 +22,8 @@ export class UploadfileService {
   getSingleFile(id: any) {
     return this.http.get<FileUpload>(`${url}${id}`);
   }
+
+  deleteFile(id: any) {
+    return this.http.delete(`${url}${id}`);
+  }
 }
