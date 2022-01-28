@@ -5,21 +5,21 @@
             <div *ngFor="let datausers of allUsers">
                 <div *ngIf="datarecipes.user == datausers.id">
                     {{ datausers.username }}
-                </div>
-            </div>
-            <div class="block-recipe" (click)="onViewRecipe(datarecipes.id)">
-                <div *ngFor="let datafile of allFileUpload">
-                    <div *ngIf="datarecipes.file == datafile.id">
-                        <img [src]=datafile.file  style="width: 280px; height: 400px;"/>
+                    <div class="block-recipe" (click)="onViewRecipe(datarecipes.id)">
+                        <div *ngFor="let datafile of allFileUpload">
+                            <div *ngIf="datarecipes.file == datafile.id">
+                                <img [src]=datafile.file  style="width: 280px; height: 400px;"/>
+                            </div>
+                        </div>
+                        <p>{{ datarecipes.id }}</p>
+                        <p>{{ datarecipes.title }}</p>
                     </div>
                 </div>
-                <p>{{ datarecipes.id }}</p>
-                <p>{{ datarecipes.title }}</p>
             </div>
         </div>
     </div>
 
-    <a class="btn btn-primary" href="/create-recipe" role="button">Ajouter une recette</a>
+    <a class="btn btn-primary" style="margin-top: 20px;" href="/create-recipe" role="button">Ajouter une recette</a>
 
     <app-all-comments [users]="allUsers"></app-all-comments>
     <app-create-comment [user]="user"></app-create-comment>

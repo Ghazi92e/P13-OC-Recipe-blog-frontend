@@ -6,6 +6,8 @@ import { Users } from '../../_models/Users.model';
 import { RecipesService } from '../../_services/recipes.service';
 import { UploadfileService } from 'src/app/_services/uploadfile.service';
 import { FileUpload } from 'src/app/_models/Fileupload.model';
+import { FavoriteRecipe } from 'src/app/_models/FavoriteRecipe.model';
+import { FavoriteRecipesService } from 'src/app/_services/favorite-recipes.service';
 
 @Component({
   selector: 'app-recipes-list',
@@ -20,16 +22,18 @@ export class RecipesListComponent implements OnInit {
   user: Users
   allUsers: Users[] = []
   allFileUpload: FileUpload[] = []
+  favRecipes: FavoriteRecipe[] = []
+  addfavRecipe: FavoriteRecipe
 
-  constructor(private recipesService: RecipesService, private userService: UsersService, private router: Router, private uploadFileService: UploadfileService) {
-    this.user = { id: 0, username: '', password: '', email: '', file: 0}
+  constructor(private recipesService: RecipesService, private userService: UsersService, private router: Router, private uploadFileService: UploadfileService, private favoriteRecipeService: FavoriteRecipesService) {
+    this.user = { id: 0, username: '', password: '', email: '', file: 0 }
+    this.addfavRecipe = { id: 0, user: 0, recipe: 0 }
   }
 
   ngOnInit(): void {
     this.currentuser = localStorage.getItem('token');
     this.recipesService.getAllRecipes().subscribe(data => {
       this.recipes = data
-      // console.log(data)
     })
 
     this.uploadFileService.getFile().subscribe(data => {
@@ -55,9 +59,24 @@ export class RecipesListComponent implements OnInit {
       console.log(this.allUsers)
     })
 
+    this.favoriteRecipeService.getAllFavoriteRecipes().subscribe(data => {
+      this.favRecipes = data
+      console.log(this.favRecipes)
+    })
   }
 
   onViewRecipe(id: number) {
     this.router.navigate(['/recipe', 'view', id]);
+  }
+
+  addFavRecipe(userid: number, recipeid: number) {
+    this.addfavRecipe = new FavoriteRecipe()
+    this.addfavRecipe.user = userid
+    this.addfavRecipe.recipe = recipeid
+    this.favoriteRecipeService.createFavoriteRecipe(this.addfavRecipe).subscribe(data => {
+      console.log(data)
+    }, error => {
+      console.log(error)
+    })
   }
 }
