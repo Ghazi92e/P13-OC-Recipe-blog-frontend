@@ -3,6 +3,9 @@
     <img [src]=fileupload.file style="max-width: 400px;" />
     <p>{{ recipe.id }}</p>
     <p>{{ recipe.description }}</p>
-    <button type="button" class="btn btn-danger" *ngIf="user[0] && user[0].id == recipe.user"(click)="deleteRecipe(recipe.id)">supprimer la recette</button>
+    <button type="button" class="btn btn-danger" style="margin-right: 10px;" *ngIf="user[0] && user[0].id == recipe.user"(click)="deleteRecipe(recipe.id)">supprimer la recette</button>
     <button class="btn btn-primary"  style="margin-right: 10px;" *ngIf="user[0] && user[0].id == recipe.user" (click)="editRecipe()">Modifier contenu</button>
+
+    <button *ngIf="!show" class="btn btn-primary" (click)="addFavRecipe(user[0].id, recipe.id)">Ajouter à mes favoris</button>
+    <!-- <button *ngIf="show" class="btn btn-danger">Supprimer de mes favoris</button> -->
 </div>

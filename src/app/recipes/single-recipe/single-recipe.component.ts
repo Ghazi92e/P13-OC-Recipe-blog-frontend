@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FavoriteRecipe } from 'src/app/_models/FavoriteRecipe.model';
 import { FileUpload } from 'src/app/_models/Fileupload.model';
 import { Users } from 'src/app/_models/Users.model';
+import { FavoriteRecipesService } from 'src/app/_services/favorite-recipes.service';
 import { UploadfileService } from 'src/app/_services/uploadfile.service';
 import { UsersService } from 'src/app/_services/users.service';
 import { Recipe } from '../../_models/Recipe.model';
@@ -19,10 +21,16 @@ export class SingleRecipeComponent implements OnInit {
   user: Users[] = []
   id = this.route.snapshot.params['id'];
   fileupload: FileUpload
+  addfavRecipe: FavoriteRecipe
+  getUserFavRecipe: any
 
-  constructor(private recipesService: RecipesService, private route: ActivatedRoute, private router: Router, private userService: UsersService, private uploadFileService: UploadfileService) 
+  show = false
+
+  constructor(private recipesService: RecipesService, private route: ActivatedRoute, private router: Router, private userService: UsersService, private uploadFileService: UploadfileService, private favoriteRecipeService: FavoriteRecipesService) 
   { this.recipe = {id: 0, title:'', description: '', category: 0, file: 0, user: 0}
-    this.fileupload = { id: 0, file: ''} }
+    this.fileupload = { id: 0, file: ''}
+    this.addfavRecipe = {id: 0, user: 0, recipe: 0}
+  }
 
   ngOnInit(): void {
     this.recipesService.getSingleRecipe(this.id).subscribe(data => {
@@ -39,9 +47,21 @@ export class SingleRecipeComponent implements OnInit {
     this.userService.getCurrentUser(this.currentuser).subscribe(data => {
       this.user = data
       console.log(this.user[0])
+      this.getUserFavoriteRecipe(this.user[0].id)
     })
+  }
 
-    console.log(this.recipe)
+  getUserFavoriteRecipe(currentUserid: any) {
+    this.userService.getFavoriteRecipesUser(currentUserid).subscribe(data => {
+      this.getUserFavRecipe = data 
+      console.log(this.getUserFavRecipe)
+      for (let data of this.getUserFavRecipe.favorite_recipes) {
+        console.log(data)
+        if(data == this.id) {
+          this.show = true
+        }
+      }
+    })
   }
 
   deleteRecipe(id: any) {
@@ -58,4 +78,20 @@ export class SingleRecipeComponent implements OnInit {
     this.router.navigate(['/recipe', 'edit', this.id]);
   }
 
+  addFavRecipe(userid: number, recipeid: number) {
+    this.addfavRecipe = {
+      id: 0,
+      user: userid,
+      recipe: recipeid
+    }
+    // this.addfavRecipe = new FavoriteRecipe()
+    // this.addfavRecipe.user = userid
+    // this.addfavRecipe.recipe = recipeid
+    this.favoriteRecipeService.createFavoriteRecipe(this.addfavRecipe).subscribe(data => {
+      console.log(data)
+      this.show = true
+    }, error => {
+      console.log(error)
+    })
+  }
 }
