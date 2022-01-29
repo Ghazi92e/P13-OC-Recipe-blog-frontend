@@ -19,13 +19,10 @@ export class FavoriteRecipesComponent implements OnInit {
   currentuser: any
   user: Users
   recipes: Recipe[] = []
-  allFileUpload: FileUpload[] = []
+  // allFileUpload: FileUpload[] = []
   userFavoriteRecipes: any
   getUserRecipes: Users[] = []
   FileRecipe: FileUpload[] = []
-  favoriteRecipe: FavoriteRecipe | any
-
-  doubleuser = false
 
   constructor(private favoriteRecipeService: FavoriteRecipesService, private userService: UsersService, private recipesService: RecipesService, private uploadFileService: UploadfileService, private router: Router) 
   { 
@@ -40,10 +37,10 @@ export class FavoriteRecipesComponent implements OnInit {
       this.getUserFavoriteRecipe(this.user.id)
     })
 
-    this.uploadFileService.getFile().subscribe(data => {
-      this.allFileUpload = data
-      console.log(this.allFileUpload)
-    })
+    // this.uploadFileService.getFile().subscribe(data => {
+    //   this.allFileUpload = data
+    //   console.log(this.allFileUpload)
+    // })
 
     console.log(this.recipes)
     console.log(this.FileRecipe)
