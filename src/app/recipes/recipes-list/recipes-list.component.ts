@@ -8,6 +8,8 @@ import { UploadfileService } from 'src/app/_services/uploadfile.service';
 import { FileUpload } from 'src/app/_models/Fileupload.model';
 import { FavoriteRecipe } from 'src/app/_models/FavoriteRecipe.model';
 import { FavoriteRecipesService } from 'src/app/_services/favorite-recipes.service';
+import { CategoryService } from 'src/app/_services/category.service';
+import { Category } from 'src/app/_models/Category.model';
 
 @Component({
   selector: 'app-recipes-list',
@@ -21,21 +23,25 @@ export class RecipesListComponent implements OnInit {
   datauser = []
   user: Users
   allUsers: Users[] = []
+  allCategories: Category[] = []
   allFileUpload: FileUpload[] = []
   favRecipes: FavoriteRecipe[] = []
   addfavRecipe: FavoriteRecipe
 
-  constructor(private recipesService: RecipesService, private userService: UsersService, private router: Router, private uploadFileService: UploadfileService, private favoriteRecipeService: FavoriteRecipesService) {
+  dataEventCategories: number[] = []
+
+  constructor(private recipesService: RecipesService, private userService: UsersService, private router: Router, private uploadFileService: UploadfileService, private favoriteRecipeService: FavoriteRecipesService, private categoryService: CategoryService) {
     this.user = { id: 0, username: '', password: '', email: '', file: 0 }
     this.addfavRecipe = { id: 0, user: 0, recipe: 0 }
   }
 
   ngOnInit(): void {
     this.currentuser = localStorage.getItem('token');
+
     this.recipesService.getAllRecipes().subscribe(data => {
       this.recipes = data
     })
-
+  
     this.uploadFileService.getFile().subscribe(data => {
       this.allFileUpload = data
       console.log(this.allFileUpload)
@@ -63,10 +69,44 @@ export class RecipesListComponent implements OnInit {
       this.favRecipes = data
       console.log(this.favRecipes)
     })
+
+    this.categoryService.getAllCategories().subscribe(data => {
+      console.log(data)
+      this.allCategories = data
+    })
   }
 
   onViewRecipe(id: number) {
     this.router.navigate(['/recipe', 'view', id]);
+  }
+
+  getRecipeCategory(event: any) {
+    const dataEvent = event.target.value
+
+    this.recipes = []
+
+    if (event.target.checked == true) {
+      this.dataEventCategories.push(dataEvent)
+    } else {
+      var index = this.dataEventCategories.indexOf(dataEvent)
+      this.dataEventCategories.splice(index, 1)
+    }
+
+    if (this.dataEventCategories.length == 0) {
+      this.recipesService.getAllRecipes().subscribe(data => {
+        this.recipes = data
+      })
+    } else {
+      for (let dataIdCategory of this.dataEventCategories) {
+        console.log(dataIdCategory)
+        this.recipesService.findRecipeByCategory(dataIdCategory).subscribe(data => {
+          console.log(data)
+          this.recipes = this.recipes.concat(data)
+        }, error => {
+          console.log(error)
+        })
+      }
+    }
   }
 
   addFavRecipe(userid: number, recipeid: number) {

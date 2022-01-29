@@ -1,4 +1,13 @@
 <div class="container">
+    <h1 class="text-center" style="margin-top: 30px; margin-bottom: 20px;">Séléctionnez les recettes par categories !</h1>
+    <div class="d-flex justify-content-center" style="margin-bottom: 50px;">
+        <div *ngFor="let cat of allCategories">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="{{ cat.id }}" [checked]="false" (change)="getRecipeCategory($event)">
+                <label class="form-check-label" for="inlineCheckbox1">{{ cat.name }}</label>
+            </div>
+        </div>
+    </div>
     <h1 class="text-center">Les Recettes</h1>
     <div class="row">
         <div *ngFor="let datarecipes of recipes; let i = index" class="col-sm-4">
