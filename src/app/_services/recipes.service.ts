@@ -28,6 +28,10 @@ export class RecipesService {
     return this.http.put(`${url}${id}/`, data);
   }
 
+  findRecipeByCategory(recipecat: any) {
+    return this.http.get<Recipe[]>(`${url}?category=${recipecat}`);
+  }
+
   deleteRecipe(id: any) {
     return this.http.delete(`${url}${id}`);
   }
