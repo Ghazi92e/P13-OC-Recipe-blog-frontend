@@ -84,9 +84,6 @@ export class SingleRecipeComponent implements OnInit {
       user: userid,
       recipe: recipeid
     }
-    // this.addfavRecipe = new FavoriteRecipe()
-    // this.addfavRecipe.user = userid
-    // this.addfavRecipe.recipe = recipeid
     this.favoriteRecipeService.createFavoriteRecipe(this.addfavRecipe).subscribe(data => {
       console.log(data)
       this.show = true
