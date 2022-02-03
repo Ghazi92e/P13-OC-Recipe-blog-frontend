@@ -8,7 +8,7 @@ import { SignUpComponent } from './authentication/sign-up/sign-up.component';
 import { SingleRecipeComponent } from './recipes/single-recipe/single-recipe.component';
 import { EditRecipeComponent } from './recipes/edit-recipe/edit-recipe.component';
 import { DashboardComponent } from './authentication/dashboard/dashboard.component';
-import { FavoriteRecipesComponent } from './favorite-recipes/favorite-recipes.component';
+import { FavoriteRecipesComponent } from './users/favorite-recipes/favorite-recipes.component';
 
 const routes: Routes = [
   { path: '', component: RecipesListComponent },

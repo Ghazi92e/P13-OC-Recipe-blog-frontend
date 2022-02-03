@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FavoriteRecipe } from '../_models/FavoriteRecipe.model';
-import { FileUpload } from '../_models/Fileupload.model';
-import { Recipe } from '../_models/Recipe.model';
-import { Users } from '../_models/Users.model';
-import { FavoriteRecipesService } from '../_services/favorite-recipes.service';
-import { RecipesService } from '../_services/recipes.service';
-import { UploadfileService } from '../_services/uploadfile.service';
-import { UsersService } from '../_services/users.service';
+import { FavoriteRecipe } from '../../_models/FavoriteRecipe.model';
+import { FileUpload } from '../../_models/Fileupload.model';
+import { Recipe } from '../../_models/Recipe.model';
+import { Users } from '../../_models/Users.model';
+import { FavoriteRecipesService } from '../../_services/favorite-recipes.service';
+import { RecipesService } from '../../_services/recipes.service';
+import { UploadfileService } from '../../_services/uploadfile.service';
+import { UsersService } from '../../_services/users.service';
 
 @Component({
   selector: 'app-favorite-recipes',

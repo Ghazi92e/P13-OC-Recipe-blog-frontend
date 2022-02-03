@@ -22,7 +22,7 @@ import { CommentService } from './_services/comment.service';
 import { EditRecipeComponent } from './recipes/edit-recipe/edit-recipe.component';
 import { UploadfileService } from './_services/uploadfile.service';
 import { DashboardComponent } from './authentication/dashboard/dashboard.component';
-import { FavoriteRecipesComponent } from './favorite-recipes/favorite-recipes.component';
+import { FavoriteRecipesComponent } from './users/favorite-recipes/favorite-recipes.component';
 import { FavoriteRecipesService } from './_services/favorite-recipes.service';
 
 
