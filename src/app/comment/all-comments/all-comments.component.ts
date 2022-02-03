@@ -17,7 +17,7 @@ export class AllCommentsComponent implements OnInit {
   currentuser: any
   user: Users
 
-  constructor(private commentService: CommentService, private userService: UsersService) { this.createdAt = '', this.user = { id: 0, username: '', password: '', email: '', file: 1 } }
+  constructor(private commentService: CommentService, private userService: UsersService) { this.createdAt = '', this.user = { id: 0, username: '', password: '', email: '', file: 0, image_url: '' } }
 
   ngOnInit(): void {
     this.commentService.getAllComment().subscribe(data => {

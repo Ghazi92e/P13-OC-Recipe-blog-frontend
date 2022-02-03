@@ -31,7 +31,7 @@ export class RecipesListComponent implements OnInit {
   dataEventCategories: number[] = []
 
   constructor(private recipesService: RecipesService, private userService: UsersService, private router: Router, private uploadFileService: UploadfileService, private favoriteRecipeService: FavoriteRecipesService, private categoryService: CategoryService) {
-    this.user = { id: 0, username: '', password: '', email: '', file: 0 }
+    this.user = { id: 0, username: '', password: '', email: '', file: 0, image_url: '' }
     this.addfavRecipe = { id: 0, user: 0, recipe: 0 }
   }
 

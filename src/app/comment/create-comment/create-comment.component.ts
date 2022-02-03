@@ -15,7 +15,7 @@ export class CreateCommentComponent implements OnInit {
   comment: Comment
   @Input() user: Users
 
-  constructor(private formBuilder: FormBuilder, private commentService: CommentService) { this.comment = { id: 0, created:'', description:'', user: 0 }, this.user = { id: 0, username: '', password: '', email: '', file: 1 } }
+  constructor(private formBuilder: FormBuilder, private commentService: CommentService) { this.comment = { id: 0, created:'', description:'', user: 0 }, this.user = { id: 0, username: '', password: '', email: '', file: 0, image_url: '' } }
   ngOnInit(): void {
     this.initForm()
   }

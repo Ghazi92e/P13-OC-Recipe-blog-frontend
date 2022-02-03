@@ -26,7 +26,7 @@ export class FavoriteRecipesComponent implements OnInit {
 
   constructor(private favoriteRecipeService: FavoriteRecipesService, private userService: UsersService, private recipesService: RecipesService, private uploadFileService: UploadfileService, private router: Router) 
   { 
-    this.user = { id: 0, username: '', password: '', email: '', file: 1 }
+    this.user = { id: 0, username: '', password: '', email: '', file: 0 , image_url: ''}
   }
 
   ngOnInit(): void {
