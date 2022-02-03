@@ -4,6 +4,7 @@ export class Users {
     email: string
     password: string
     file: number
+    image_url: string
 
     constructor() {
         this.id = 0
@@ -11,5 +12,6 @@ export class Users {
         this.email = ''
         this.password = ''
         this.file = 1
+        this.image_url = ''
     }
 }
