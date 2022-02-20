@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="row">
+        <div class="text-center block-user">
+            <p>{{ user.username }}</p>
+            <img [src]=user.image_url width="150px">
+            <p><button *ngIf="show && currentuser.id != userid" class="btn btn-primary" (click)="followUser()">S'abonner</button></p>
+            <p><button *ngIf="!show && currentuser.id != userid" class="btn btn-primary" (click)="unsuscribeUser()">Se desabonner</button></p>
+        </div>
+
+        <!-- <div *ngFor="let userRecipesIds of userRecipesIds">
+            <div *ngFor="let userRecipes of userRecipes; let i = index">
+                <div *ngIf="userRecipesIds == userRecipes.id">
+                    <p>{{ userRecipes.title }}</p>
+                    <img [src]=userRecipes.image_url>
+                </div>
+            </div>
+        </div> -->
+        <h2 class="text-center">Mes recettes</h2>
+        <div *ngFor="let userRecipes of userRecipes; let i = index" class="col-md-3 text-center">
+            <div class="block-recipes" (click)="onViewRecipe(userRecipes.id)">
+                <p>{{ userRecipes.title }}</p>
+                <img [src]=userRecipes.image_url width="250px">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- (click)="addFavRecipe(user[0].id, recipe.id) -->
