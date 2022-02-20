@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsersService } from '../../_services/users.service';
 import { Recipe } from '../../_models/Recipe.model';
@@ -10,6 +10,8 @@ import { FavoriteRecipe } from 'src/app/_models/FavoriteRecipe.model';
 import { FavoriteRecipesService } from 'src/app/_services/favorite-recipes.service';
 import { CategoryService } from 'src/app/_services/category.service';
 import { Category } from 'src/app/_models/Category.model';
+import { interval } from 'rxjs';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-recipes-list',
@@ -25,10 +27,16 @@ export class RecipesListComponent implements OnInit {
   allUsers: Users[] = []
   allCategories: Category[] = []
   allFileUpload: FileUpload[] = []
-  favRecipes: FavoriteRecipe[] = []
+  // favRecipes: FavoriteRecipe[] = []
   addfavRecipe: FavoriteRecipe
 
   dataEventCategories: number[] = []
+
+  currentFollowingUser: any
+
+  recipesFollowingsUser: any[] = []
+
+  getUserFollowing: any[] = []
 
   constructor(private recipesService: RecipesService, private userService: UsersService, private router: Router, private uploadFileService: UploadfileService, private favoriteRecipeService: FavoriteRecipesService, private categoryService: CategoryService) {
     this.user = { id: 0, username: '', password: '', email: '', file: 0, image_url: '' }
@@ -37,37 +45,17 @@ export class RecipesListComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentuser = localStorage.getItem('token');
-
-    this.recipesService.getAllRecipes().subscribe(data => {
-      this.recipes = data
-    })
-  
-    this.uploadFileService.getFile().subscribe(data => {
-      this.allFileUpload = data
-      console.log(this.allFileUpload)
-    })
-
-    this.currentuser = localStorage.getItem('token');
     if (this.currentuser == null) {
       console.log("je suis deco")
       this.router.navigate(['sign-in'])
     } else {
       console.log("je suis co")
     }
-
+  
     this.userService.getCurrentUser(this.currentuser).subscribe(data => {
       this.user = data[0]
+      this.getFollowingCurrentUser(this.user.id)
       console.log(this.user)
-    })
-
-    this.userService.getAllUsers().subscribe(data => {
-      this.allUsers = data
-      console.log(this.allUsers)
-    })
-
-    this.favoriteRecipeService.getAllFavoriteRecipes().subscribe(data => {
-      this.favRecipes = data
-      console.log(this.favRecipes)
     })
 
     this.categoryService.getAllCategories().subscribe(data => {
@@ -81,9 +69,10 @@ export class RecipesListComponent implements OnInit {
   }
 
   getRecipeCategory(event: any) {
+    console.log(this.currentFollowingUser)
     const dataEvent = event.target.value
 
-    this.recipes = []
+    this.recipesFollowingsUser = []
 
     if (event.target.checked == true) {
       this.dataEventCategories.push(dataEvent)
@@ -93,19 +82,17 @@ export class RecipesListComponent implements OnInit {
     }
 
     if (this.dataEventCategories.length == 0) {
-      this.recipesService.getAllRecipes().subscribe(data => {
-        this.recipes = data
-      })
+      this.getUserFollowing = []
+      this.getFollowingCurrentUser(this.user.id)
     } else {
-      for (let dataIdCategory of this.dataEventCategories) {
-        console.log(dataIdCategory)
-        this.recipesService.findRecipeByCategory(dataIdCategory).subscribe(data => {
-          console.log(data)
-          this.recipes = this.recipes.concat(data)
-        }, error => {
-          console.log(error)
-        })
+      const objectcat = {
+        'category__in': this.dataEventCategories,
+        'user__in': this.getUserFollowing
       }
+      this.userService.getUserRecipesFollowing_by_category(objectcat).subscribe(data => {
+        this.recipesFollowingsUser = data
+        console.log(data)
+      })
     }
   }
 
@@ -117,6 +104,28 @@ export class RecipesListComponent implements OnInit {
       console.log(data)
     }, error => {
       console.log(error)
+    })
+  }
+
+  getFollowingCurrentUser(currentuserid: any) {
+    console.log(currentuserid)
+    this.getUserFollowing.push(currentuserid)
+    this.userService.getFollowingUser(currentuserid).subscribe(data => {
+      this.currentFollowingUser = data
+      console.log(this.currentFollowingUser)
+
+      if (this.currentFollowingUser.length == 0) {
+        this.currentFollowingUser = [{'user_follower': '2', 'user_following': '0'}]
+      }
+      console.log(this.currentFollowingUser)
+      this.userService.getUserFollowingRecipes(this.currentFollowingUser).subscribe(data => {
+        this.recipesFollowingsUser = data
+        console.log(data)
+      })
+
+      for (let data of this.currentFollowingUser) {
+        this.getUserFollowing.push(data.user_following[0])
+      }
     })
   }
 }

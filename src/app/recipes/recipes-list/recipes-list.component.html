@@ -10,20 +10,13 @@
     </div>
     <h1 class="text-center">Les Recettes</h1>
     <div class="row">
-        <div *ngFor="let datarecipes of recipes; let i = index" class="col-sm-4">
-            <div *ngFor="let datausers of allUsers">
-                <div *ngIf="datarecipes.user == datausers.id">
-                    {{ datausers.username }}
-                    <div class="block-recipe" (click)="onViewRecipe(datarecipes.id)">
-                        <div *ngFor="let datafile of allFileUpload">
-                            <div *ngIf="datarecipes.file == datafile.id">
-                                <img [src]=datafile.file  style="width: 280px; height: 400px;"/>
-                            </div>
-                        </div>
-                        <p>{{ datarecipes.id }}</p>
-                        <p>{{ datarecipes.title }}</p>
-                    </div>
-                </div>
+        <div *ngFor="let userFollowingRecipe of recipesFollowingsUser; let i = index" class="col-sm-4">
+            {{ userFollowingRecipe.user.username }}
+            <!-- <img [src]="userFollowingRecipe.user.image_url" style="width: 100px;"> -->
+            <div class="block-recipe" (click)="onViewRecipe(userFollowingRecipe.id)">
+                <img [src]=userFollowingRecipe.image_url  style="width: 280px; height: 400px;"/>
+                <p>{{ userFollowingRecipe.id }}</p>
+                <p>{{ userFollowingRecipe.title }}</p>
             </div>
         </div>
     </div>
