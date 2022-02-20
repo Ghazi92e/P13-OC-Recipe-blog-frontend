@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Recipe } from '../_models/Recipe.model';
+import { observable, Observable, Subject } from 'rxjs';
 
 const url = 'http://127.0.0.1:8000/api-recipes/'
 
@@ -10,7 +11,9 @@ const url = 'http://127.0.0.1:8000/api-recipes/'
 
 export class RecipesService {
 
-  constructor(private http: HttpClient) { }
+  subject = new Subject<object>();
+
+  constructor(private http: HttpClient) {}
 
   getAllRecipes() {
     return this.http.get<Recipe[]>(url)
@@ -21,7 +24,7 @@ export class RecipesService {
   }
 
   getSingleRecipe(id: any) {
-    return this.http.get<Recipe>(`${url}${id}`);
+    return this.http.get<Recipe>(`${url}${id}`)
   }
 
   updateRecipe(id: any, data: any) {
