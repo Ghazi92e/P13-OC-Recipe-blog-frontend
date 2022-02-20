@@ -1,0 +1,12 @@
+<div class="container">
+    <h1> Users App </h1>
+    <div class="row">
+        <div *ngFor="let allUsersApp of users" class="col-md-4">
+            <div class="block-user" (click)="onViewUserRecipes(allUsersApp.id)">
+                <p>{{ allUsersApp.username }}</p>
+                <p>{{ allUsersApp.email }}</p>
+                <img [src]="allUsersApp.image_url" width="100px">
+            </div>
+        </div>
+    </div>
+</div>
