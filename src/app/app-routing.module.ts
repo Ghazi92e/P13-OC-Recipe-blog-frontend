@@ -9,6 +9,12 @@ import { SingleRecipeComponent } from './recipes/single-recipe/single-recipe.com
 import { EditRecipeComponent } from './recipes/edit-recipe/edit-recipe.component';
 import { DashboardComponent } from './authentication/dashboard/dashboard.component';
 import { FavoriteRecipesComponent } from './users/favorite-recipes/favorite-recipes.component';
+import { UsersListComponent } from './users/users-list/users-list.component';
+import { UserRecipesComponent } from './users/user-recipes/user-recipes.component';
+import { FooterComponent } from './footer/footer.component';
+import { SearchBarRecipesComponent } from './search-bar-recipes/search-bar-recipes.component';
+import { HeaderComponent } from './header/header.component';
+import { EditDashboardComponent } from './authentication/edit-dashboard/edit-dashboard.component';
 
 const routes: Routes = [
   { path: '', component: RecipesListComponent },
@@ -20,7 +26,11 @@ const routes: Routes = [
   { path: 'create-category', component: CreateCategoryComponent },
   { path: 'recipe/edit/:id', component: EditRecipeComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'favoriterecipes', component: FavoriteRecipesComponent }
+  { path: 'favoriterecipes', component: FavoriteRecipesComponent },
+  { path: 'users-list', component: UsersListComponent },
+  { path: 'user-recipe/:id', component: UserRecipesComponent },
+  { path: 'search-recipe', component: SearchBarRecipesComponent },
+  { path: 'edit-dashboard', component: EditDashboardComponent }
 ];
 
 @NgModule({

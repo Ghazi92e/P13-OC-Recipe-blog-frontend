@@ -24,6 +24,10 @@ import { UploadfileService } from './_services/uploadfile.service';
 import { DashboardComponent } from './authentication/dashboard/dashboard.component';
 import { FavoriteRecipesComponent } from './users/favorite-recipes/favorite-recipes.component';
 import { FavoriteRecipesService } from './_services/favorite-recipes.service';
+import { UsersListComponent } from './users/users-list/users-list.component';
+import { UserRecipesComponent } from './users/user-recipes/user-recipes.component';
+import { SearchBarRecipesComponent } from './search-bar-recipes/search-bar-recipes.component';
+import { EditDashboardComponent } from './authentication/edit-dashboard/edit-dashboard.component';
 
 
 @NgModule({
@@ -41,7 +45,11 @@ import { FavoriteRecipesService } from './_services/favorite-recipes.service';
     AllCommentsComponent,
     EditRecipeComponent,
     DashboardComponent,
-    FavoriteRecipesComponent
+    FavoriteRecipesComponent,
+    UsersListComponent,
+    UserRecipesComponent,
+    SearchBarRecipesComponent,
+    EditDashboardComponent
   ],
   imports: [
     BrowserModule,
