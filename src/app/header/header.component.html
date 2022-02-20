@@ -18,7 +18,15 @@
                 <li routerLinkActive="active" *ngIf="currentuser">
                     <a routerLink="recipes" class="nav-item nav-link">Recettes</a>
                 </li>
+                <li routerLinkActive="active" *ngIf="currentuser">
+                    <a routerLink="users-list" class="nav-item nav-link">Users</a>
+                </li>
             </ul>
+
+            <form [formGroup]="headerForm" (ngSubmit)="getHeader()" class="d-flex" style="margin-right: 100px;" >
+                <input class="form-control me-2" type="search" placeholder="Entrez le nom d'une recette" aria-label="Search" formControlName="recipedata">
+                <button class="btn btn-outline-success" routerLink="/search-recipe" type="submit">Search</button>
+            </form>
 
             <ul class="navbar-nav" style="margin-right: 150px;">
                 <li class="nav-item dropdown" routerLinkAcrive="active" *ngIf="currentuser">
