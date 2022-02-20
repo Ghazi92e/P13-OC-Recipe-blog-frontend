@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="row">
+        <h1 class="text-center">Recette(s) recherchée(s)</h1>
+        <div *ngFor="let userFollowingRecipeheader of recipesFollowingsUserHeader; let i = index" class="col-sm-4">
+            {{ userFollowingRecipeheader.user.username }}
+            <!-- <img [src]="userFollowingRecipe.user.image_url" style="width: 100px;"> -->
+            <div class="block-recipe" (click)="onViewRecipe(userFollowingRecipeheader.id)">
+                <img [src]=userFollowingRecipeheader.image_url  style="width: 280px; height: 400px;"/>
+                <p>{{ userFollowingRecipeheader.id }}</p>
+                <p>{{ userFollowingRecipeheader.title }}</p>
+            </div>
+        </div>
+    </div>
+</div>
