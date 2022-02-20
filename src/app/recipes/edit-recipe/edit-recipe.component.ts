@@ -13,9 +13,9 @@ export class EditRecipeComponent implements OnInit {
   recipe: Recipe;
   id = this.route.snapshot.params['id']
 
-  constructor(private recipeService: RecipesService, private route: ActivatedRoute) { this.recipe = { id: 0, title: '', description: '', file: 0, category: 0, user: 0} }
+  constructor(private recipeService: RecipesService, private route: ActivatedRoute) { this.recipe = { id: 0, title: '', description: '', file: 0, category: 0, user: 0, image_url: ''} }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.recipeService.getSingleRecipe(this.id).subscribe(data => {
       this.recipe = data
       console.log(data)
