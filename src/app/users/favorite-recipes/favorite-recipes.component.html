@@ -1,19 +1,14 @@
 <div class="container">
     <h1 class="text-center">Mes recettes favorites</h1>
     <div class="row">
-        <div *ngFor="let data of recipes; let i = index" class="col-md-4" style="margin-bottom: 100px;">
-            <span *ngIf="getUserRecipes[i] && getUserRecipes[i].id == data.user">{{ getUserRecipes[i].username }}</span>
-            {{ data.title }}
-            <div *ngFor="let datafile of FileRecipe" (click)="onViewRecipe(data.id)" style="cursor: pointer;">
-                <div *ngIf="data.file == datafile.id">
-                    <img [src]=datafile.file style="width: 280px; height: 400px;">
-                </div>
+        <div *ngFor="let data of userFavoriteRecipes; let i = index" class="col-md-3 text-center" style="margin-bottom: 100px;">
+            <div style="cursor:pointer;" (click)="onViewRecipe(data.recipe.id)">
+                <p>{{ data.recipe.title }}</p>
+                <img [src]=data.recipe.image_url width="250px">
+                <p>{{ data.recipe.description }}</p>
             </div>
-            {{ data.description }}
-            {{ data.id }}
-            {{ i }}
             <div>
-                <button class="btn btn-danger" (click)="deleteFavRecipe(user.id, i, data.id)">Supprimer des favoris</button>
+                <button class="btn btn-danger" (click)="deleteFavRecipe(user.id, i, data.recipe.id)">Supprimer des favoris</button>
             </div>
         </div>
     </div>

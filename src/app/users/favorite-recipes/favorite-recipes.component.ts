@@ -18,10 +18,8 @@ export class FavoriteRecipesComponent implements OnInit {
 
   currentuser: any
   user: Users
-  recipes: Recipe[] = []
+  userFavoriteRecipes: any[] = []
   // allFileUpload: FileUpload[] = []
-  userFavoriteRecipes: any
-  getUserRecipes: Users[] = []
   FileRecipe: FileUpload[] = []
 
   constructor(private favoriteRecipeService: FavoriteRecipesService, private userService: UsersService, private recipesService: RecipesService, private uploadFileService: UploadfileService, private router: Router) 
@@ -41,37 +39,29 @@ export class FavoriteRecipesComponent implements OnInit {
     //   this.allFileUpload = data
     //   console.log(this.allFileUpload)
     // })
-
-    console.log(this.recipes)
-    console.log(this.FileRecipe)
-    console.log(this.getUserRecipes)
-
   }
 
   getUserFavoriteRecipe(userid: any) {
-    this.userService.getFavoriteRecipesUser(userid).subscribe( data => {
+    this.userService.getFavoriteRecipesUser(userid).subscribe(data => {
+      console.log(data)
       this.userFavoriteRecipes = data
       console.log(this.userFavoriteRecipes)
-      console.log(this.userFavoriteRecipes.favorite_recipes)
-      for (let favoriteRecipesUserId of this.userFavoriteRecipes.favorite_recipes) {
-        this.getSingleRecipe(favoriteRecipesUserId)
-      }
     }, error => {
       console.log(error)
     })
   }
 
-  getSingleRecipe(id: number) {
-    this.recipesService.getSingleRecipe(id).subscribe(dataSingleRecipe => {
-      this.getSingleFile(dataSingleRecipe.file)
-      this.userService.getSingleUser(dataSingleRecipe.user).subscribe(dataSingleUser => {
-        if (dataSingleRecipe.user == dataSingleUser.id) {
-          this.recipes.push(dataSingleRecipe)
-          this.getUserRecipes.push(dataSingleUser)
-        }
-      })
-    })
-  }
+  // getSingleRecipe(id: number) {
+  //   this.recipesService.getSingleRecipe(id).subscribe(dataSingleRecipe => {
+  //     this.getSingleFile(dataSingleRecipe.file)
+  //     this.userService.getSingleUser(dataSingleRecipe.user).subscribe(dataSingleUser => {
+  //       if (dataSingleRecipe.user == dataSingleUser.id) {
+  //         this.recipes.push(dataSingleRecipe)
+  //         this.getUserRecipes.push(dataSingleUser)
+  //       }
+  //     })
+  //   })
+  // }
 
   getSingleFile(id: number) {
     this.uploadFileService.getSingleFile(id).subscribe(data => {
@@ -91,7 +81,7 @@ export class FavoriteRecipesComponent implements OnInit {
     }
     this.userService.deleteFavoriterecipeUser(currentUserId, options).subscribe(data => {
       console.log(data)
-      this.recipes.splice(index, 1)
+      this.userFavoriteRecipes.splice(index, 1)
     }, error => {
       console.log(error)
     })
