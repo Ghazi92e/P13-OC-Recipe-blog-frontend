@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FavoriteRecipe } from 'src/app/_models/FavoriteRecipe.model';
 import { FileUpload } from 'src/app/_models/Fileupload.model';
@@ -16,18 +16,18 @@ import { RecipesService } from '../../_services/recipes.service';
 })
 export class SingleRecipeComponent implements OnInit {
 
-  recipe: Recipe
+  @Input() recipe: Recipe
   currentuser: any
   user: Users[] = []
   id = this.route.snapshot.params['id'];
   fileupload: FileUpload
   addfavRecipe: FavoriteRecipe
-  getUserFavRecipe: any
+  getUserFavRecipe: any[] = []
 
   show = false
 
   constructor(private recipesService: RecipesService, private route: ActivatedRoute, private router: Router, private userService: UsersService, private uploadFileService: UploadfileService, private favoriteRecipeService: FavoriteRecipesService) 
-  { this.recipe = {id: 0, title:'', description: '', category: 0, file: 0, user: 0}
+  { this.recipe = {id: 0, title:'', description: '', category: 0, file: 0, user: 0, image_url: ''}
     this.fileupload = { id: 0, file: ''}
     this.addfavRecipe = {id: 0, user: 0, recipe: 0}
   }
@@ -53,11 +53,12 @@ export class SingleRecipeComponent implements OnInit {
 
   getUserFavoriteRecipe(currentUserid: any) {
     this.userService.getFavoriteRecipesUser(currentUserid).subscribe(data => {
-      this.getUserFavRecipe = data 
+      console.log(data)
+      this.getUserFavRecipe = data
       console.log(this.getUserFavRecipe)
-      for (let data of this.getUserFavRecipe.favorite_recipes) {
-        console.log(data)
-        if(data == this.id) {
+      for (let data of this.getUserFavRecipe) {
+        console.log(data.recipe)
+        if(data.recipe.id == this.id) {
           this.show = true
         }
       }
