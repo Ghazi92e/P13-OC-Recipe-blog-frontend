@@ -32,10 +32,46 @@ export class UsersService {
   }
 
   getFavoriteRecipesUser(id: any) {
-    return this.http.get(`${url}${id}/favorite_recipes`);
+    return this.http.get<any>(`${url}${id}/favorite_recipes`);
   }
 
   deleteFavoriterecipeUser(id: any, data: any) {
     return this.http.delete(`${url}${id}/favorite_recipes/`, data)
+  }
+
+  getRecipesUser(id: any) {
+    return this.http.get<any>(`${url}${id}/recipes`)
+    // var promise = new Promise<any>((resolve, rejected) => {
+    //   setTimeout(() => {
+    //     this.http.get<any>(`${url}${id}/recipes`).toPromise().then(( res: any) => {
+    //       resolve(res)
+    //     })
+    //   }, 1000);
+    // });
+    // return promise
+  }
+
+  getFollowingUser(id: any) {
+    return this.http.get<any>(`${url}${id}/following`)
+  }
+
+  createFollowingUser(id: any, data: any) {
+    return this.http.post<any>(`${url}${id}/following/`, data)
+  }
+
+  deleteFollowingUser(id: any, data: any) {
+    return this.http.delete(`${url}${id}/following/`, data)
+  }
+
+  getUserFollowingRecipes(data: any) {
+    return this.http.post<any>(`${url}recipes_user_following/`, data)
+  }
+
+  getUserRecipesFollowing_by_category(data: any) {
+    return this.http.post<any>(`${url}get_user_recipes_following_by_category/`, data)
+  }
+
+  searchRecipesByUserFollowing(data: any) {
+    return this.http.post<any>(`${url}search_recipes_by_user_followings/`, data)
   }
 }
