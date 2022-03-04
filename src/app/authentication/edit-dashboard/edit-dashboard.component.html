@@ -1,7 +1,24 @@
-<p>edit-dashboard works!</p>
-<form [formGroup]="userForm">
-    <div class="form-group">
-        <label for="username">Username</label>
-        <input type="email" class="form-control"  style="margin-bottom: 10px;" placeholder="Username" formControlName="username">
+<div class="container">
+    <h2 class="text-center">Editer mon profil</h2>
+    <div class="row justify-content-center" style="margin-top: 100px;">
+        <form [formGroup]="userForm" (ngSubmit)="editUserImageAccount()" class="col-6">
+            <div class="form-group">
+                <!-- <label for="username">Username</label>
+                <input type="email" class="form-control"  style="margin-bottom: 10px;" placeholder="Username" formControlName="username"> -->
+        
+                <div class="mb-3" style="margin-top: 10px;">
+                    <label for="formFile" class="form-label">Modifier ma photo de profil</label>
+                    <input class="form-control" type="file" id="formFile" (change)="onChange($event)">
+                </div>
+                <p>{{ messageFileUploaded }}</p>
+                <!-- <p>{{ Image téléchargée }}</p> -->
+        
+                <img *ngIf="user.image_url" [src]=user.image_url style="max-width: 300px;" />
+            </div>
+
+            <div class="form-group" style="margin-top: 20px;">
+                <input type="button" class="btn btn-primary" style="margin-bottom: 5px;" [disabled]="!fileUploaded" value="Modifier ma photo de profil" type="submit">
+            </div>
+        </form>
     </div>
-</form>
+</div>
