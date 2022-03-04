@@ -98,6 +98,9 @@ export class SignUpComponent implements OnInit {
               console.log(event.target.files[0].size)
               Swal.fire('Erreur image', "Image trop lourde", 'error');
             }
+            else if (width / height < 0.9) {
+              Swal.fire('Erreur image', "Dimension de l'image non conforme", 'error');
+            }
             else {
               this.currentFileUpload = event.target.files[0]
               this.upload()
