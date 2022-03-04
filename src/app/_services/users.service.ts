@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Users } from '../_models/Users.model';
+import { Subject } from 'rxjs';
 
 const url = 'http://127.0.0.1:8000/api-users/'
 const user_auth = 'http://127.0.0.1:8000/api-token-auth/'
@@ -9,6 +10,9 @@ const user_auth = 'http://127.0.0.1:8000/api-token-auth/'
 })
 
 export class UsersService {
+
+  userFollowingsData = new Subject<object>();
+
   constructor(private http: HttpClient) { }
 
   getAllUsers() {
@@ -17,6 +21,10 @@ export class UsersService {
 
   createUser(data: any) {
     return this.http.post(url, data);
+  }
+
+  updateUser(id:any, data: any) {
+    return this.http.put(`${url}${id}/`, data);
   }
 
   getUserToken(data: any) {
