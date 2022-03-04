@@ -84,11 +84,11 @@ export class CreateRecipeComponent implements OnInit {
             const width = img.naturalWidth;
             console.log('Width and Height', width, height);
             console.log(event.target.files[0].size)
-            if (event.target.files[0].size > 350000) {
+            if (event.target.files[0].size > 402000) {
               console.log(event.target.files[0].size)
               Swal.fire('Erreur image', "Image trop lourde", 'error');
             }
-            else if (width / height > 0.7) {
+            else if (width / height > 0.76) {
               Swal.fire('Erreur image', "Dimension de l'image non conforme", 'error');
             }
             else if (width < 100 ) {

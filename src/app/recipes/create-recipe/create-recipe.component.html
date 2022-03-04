@@ -25,7 +25,8 @@
 
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <input type="description" class="form-control" style="margin-bottom: 10px;" placeholder="Description" formControlName="description">
+                    <!-- <textarea class="form-control" aria-label="With textarea"></textarea> -->
+                    <textarea type="description" class="form-control" style="margin-bottom: 10px;" placeholder="Description" formControlName="description"></textarea>
                 </div>
 
                 <label for="categories">Categorie</label>
@@ -40,7 +41,7 @@
                     <input class="form-control" type="file" id="formFile" (change)="onChange($event)">
                 </div>
 
-                <img *ngIf="recipeFile" [src]=recipeFile style="max-width: 400px;" />
+                <img *ngIf="recipeFile" [src]=recipeFile style="height:100%; width: 80%; object-fit: contain;"/>
 
                 <div class="form-group" style="margin-top: 20px;">
                     <input type="button" class="btn btn-primary" style="margin-bottom: 5px;" value="Ajouter ma recette" type="submit">

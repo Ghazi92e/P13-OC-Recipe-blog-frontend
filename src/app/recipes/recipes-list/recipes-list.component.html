@@ -8,22 +8,29 @@
             </div>
         </div>
     </div>
-    <h1 class="text-center">Les Recettes</h1>
+    <h1 class="text-center" style="margin-bottom: 30px;">Les Recettes</h1>
+    <pagination-controls (pageChange)="p = $event" class="text-center" previousLabel="Précédent" nextLabel="Suivant"></pagination-controls>
     <div class="row">
-        <div *ngFor="let userFollowingRecipe of recipesFollowingsUser; let i = index" class="col-sm-4">
-            {{ userFollowingRecipe.user.username }}
-            <!-- <img [src]="userFollowingRecipe.user.image_url" style="width: 100px;"> -->
-            <div class="block-recipe" (click)="onViewRecipe(userFollowingRecipe.id)">
-                <img [src]=userFollowingRecipe.image_url  style="width: 280px; height: 400px;"/>
-                <p>{{ userFollowingRecipe.id }}</p>
-                <p>{{ userFollowingRecipe.title }}</p>
+        <div *ngFor="let userFollowingRecipe of recipesFollowingsUser | paginate: { itemsPerPage: 6, currentPage: p }; let i = index" class="col-md-4">
+            <div class="global-block-recipe">
+                <img [src]=userFollowingRecipe.user.image_url  style="width:70px; border-radius: 50%; margin-bottom: 10px; margin-right: 10px;"/>
+                {{ userFollowingRecipe.user.username }}
+                <!-- <img [src]=userFollowingRecipe.user.image_url/> -->
+                <!-- <img [src]="userFollowingRecipe.user.image_url" style="width: 100px;"> -->
+                <div class="block-recipe" (click)="onViewRecipe(userFollowingRecipe.id)">
+                    <img [src]=userFollowingRecipe.image_url  style="max-width:300px; height: 400px; object-fit: cover;"/>
+                    <!-- <p>{{ userFollowingRecipe.id }}</p> -->
+                    <p style="margin-top: 15px;">{{ userFollowingRecipe.title }}</p>
+                </div>
             </div>
         </div>
     </div>
+    <pagination-controls (pageChange)="p = $event" class="text-center" style="margin-top: 20px;" previousLabel="Précédent" nextLabel="Suivant"></pagination-controls>
+
 
     <a class="btn btn-primary" style="margin-top: 20px;" href="/create-recipe" role="button">Ajouter une recette</a>
 
-    <app-all-comments [users]="allUsers"></app-all-comments>
     <app-create-comment [user]="user"></app-create-comment>
+    <app-all-comments [users]="allUsers"></app-all-comments>
 </div>
 

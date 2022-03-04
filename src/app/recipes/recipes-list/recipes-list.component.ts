@@ -20,15 +20,12 @@ import { HttpParams } from '@angular/common/http';
 })
 export class RecipesListComponent implements OnInit {
 
-  recipes: Recipe[] = []
   currentuser: any
-  datauser = []
   user: Users
   allUsers: Users[] = []
   allCategories: Category[] = []
-  allFileUpload: FileUpload[] = []
-  // favRecipes: FavoriteRecipe[] = []
   addfavRecipe: FavoriteRecipe
+  p: number = 1;
 
   dataEventCategories: number[] = []
 
@@ -69,6 +66,7 @@ export class RecipesListComponent implements OnInit {
   }
 
   getRecipeCategory(event: any) {
+    this.p = 1
     console.log(this.currentFollowingUser)
     const dataEvent = event.target.value
 
@@ -115,7 +113,7 @@ export class RecipesListComponent implements OnInit {
       console.log(this.currentFollowingUser)
 
       if (this.currentFollowingUser.length == 0) {
-        this.currentFollowingUser = [{'user_follower': '2', 'user_following': '0'}]
+        this.currentFollowingUser = [{'user_follower': currentuserid.toString(), 'user_following': '0'}]
       }
       console.log(this.currentFollowingUser)
       this.userService.getUserFollowingRecipes(this.currentFollowingUser).subscribe(data => {
@@ -126,6 +124,9 @@ export class RecipesListComponent implements OnInit {
       for (let data of this.currentFollowingUser) {
         this.getUserFollowing.push(data.user_following[0])
       }
+
+      this.userService.userFollowingsData.next(this.getUserFollowing)
     })
+
   }
 }

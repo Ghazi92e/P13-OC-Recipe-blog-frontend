@@ -16,9 +16,16 @@ export class SearchBarRecipesComponent implements OnInit {
   recipesFollowingsUserHeader: any[] = []
   datasearchbar: any
 
+  datatest: any
+
   constructor(private userService: UsersService, private router: Router, private recipeService: RecipesService) { this.datasearchbar = {title: '', user__in: '' } }
 
   ngOnInit(): void {
+    this.userService.userFollowingsData.subscribe(data => {
+      this.datatest = data
+      console.log(this.datatest)
+    })
+
     this.recipeService.subject.subscribe(data => {
       this.datasearchbar = data
       this.userService.searchRecipesByUserFollowing(this.datasearchbar).subscribe(data => {

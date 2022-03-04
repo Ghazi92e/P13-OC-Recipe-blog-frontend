@@ -11,6 +11,7 @@ import { UsersService } from 'src/app/_services/users.service';
 export class UsersListComponent implements OnInit {
 
   users: Users[] = []
+  p: number = 1;
 
   constructor(private usersService: UsersService, private router: Router) { }
 

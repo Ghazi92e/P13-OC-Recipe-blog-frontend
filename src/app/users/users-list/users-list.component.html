@@ -1,7 +1,7 @@
 <div class="container">
     <h1> Users App </h1>
     <div class="row">
-        <div *ngFor="let allUsersApp of users" class="col-md-4">
+        <div *ngFor="let allUsersApp of users | paginate: { itemsPerPage: 6, currentPage: p }" class="col-md-4" style="margin-bottom: 40px;">
             <div class="block-user" (click)="onViewUserRecipes(allUsersApp.id)">
                 <p>{{ allUsersApp.username }}</p>
                 <p>{{ allUsersApp.email }}</p>
@@ -9,4 +9,5 @@
             </div>
         </div>
     </div>
+    <pagination-controls (pageChange)="p = $event" class="text-center" previousLabel="Précédent" nextLabel="Suivant"></pagination-controls>
 </div>

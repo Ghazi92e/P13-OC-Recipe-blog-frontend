@@ -1,15 +1,12 @@
 <div class="container">
     <h1 class="text-center">Mes recettes favorites</h1>
     <div class="row">
-        <div *ngFor="let data of userFavoriteRecipes; let i = index" class="col-md-3 text-center" style="margin-bottom: 100px;">
+        <div *ngFor="let data of userFavoriteRecipes; let i = index" class="col-md-3 text-center">
             <div style="cursor:pointer;" (click)="onViewRecipe(data.recipe.id)">
                 <p>{{ data.recipe.title }}</p>
                 <img [src]=data.recipe.image_url width="250px">
-                <p>{{ data.recipe.description }}</p>
             </div>
-            <div>
-                <button class="btn btn-danger" (click)="deleteFavRecipe(user.id, i, data.recipe.id)">Supprimer des favoris</button>
-            </div>
+            <button class="btn btn-danger" (click)="deleteFavRecipe(user.id, i, data.recipe.id)" style="margin-top: 20px;">Supprimer des favoris</button>
         </div>
     </div>
 </div>

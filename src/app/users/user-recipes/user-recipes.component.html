@@ -16,12 +16,13 @@
             </div>
         </div> -->
         <h2 class="text-center">Mes recettes</h2>
-        <div *ngFor="let userRecipes of userRecipes; let i = index" class="col-md-3 text-center">
+        <div *ngFor="let userRecipes of userRecipes | paginate: { itemsPerPage: 8, currentPage: p }; let i = index" class="col-md-3 text-center">
             <div class="block-recipes" (click)="onViewRecipe(userRecipes.id)">
                 <p>{{ userRecipes.title }}</p>
                 <img [src]=userRecipes.image_url width="250px">
             </div>
         </div>
+        <pagination-controls (pageChange)="p = $event" class="text-center" style="margin-bottom: 50px;" previousLabel="Précédent" nextLabel="Suivant"></pagination-controls>
     </div>
 </div>
 

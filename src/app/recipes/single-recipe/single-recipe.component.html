@@ -1,11 +1,18 @@
-<div class="container">
-    <p>{{ recipe.title }}</p>
-    <img [src]=fileupload.file style="max-width: 400px;" />
-    <p>{{ recipe.id }}</p>
-    <p>{{ recipe.description }}</p>
-    <button type="button" class="btn btn-danger" style="margin-right: 10px;" *ngIf="user[0] && user[0].id == recipe.user"(click)="deleteRecipe(recipe.id)">supprimer la recette</button>
-    <button class="btn btn-primary"  style="margin-right: 10px;" *ngIf="user[0] && user[0].id == recipe.user" (click)="editRecipe()">Modifier contenu</button>
+<div class="position-relative">
+    <div class="position-absolute top-0 start-50 translate-middle-x">
+        <p>{{ recipe.title }}</p>
+        <img [src]=fileupload.file style="max-width: 400px;" />
+        <p>{{ recipe.id }}</p>
+        <div style="white-space: pre-line; padding-bottom: 50px;"> 
+            <span class="recipedescription">Préparation</span>
+            <p>{{recipe.description}}</p>
+            <!-- <p>{{ recipe.description }}</p> -->
+            <button type="button" class="btn btn-danger" style="margin-right: 10px;" *ngIf="user[0] && user[0].id == recipe.user"(click)="deleteRecipe(recipe.id)">supprimer la recette</button>
+            <button class="btn btn-primary"  style="margin-right: 10px;" *ngIf="user[0] && user[0].id == recipe.user" (click)="editRecipe()">Modifier contenu</button>
+        
+            <button *ngIf="!show" class="btn btn-primary" (click)="addFavRecipe(user[0].id, recipe.id)">Ajouter à mes favoris</button>
+            <!-- <button *ngIf="show" class="btn btn-danger">Supprimer de mes favoris</button> -->
+        </div>
 
-    <button *ngIf="!show" class="btn btn-primary" (click)="addFavRecipe(user[0].id, recipe.id)">Ajouter à mes favoris</button>
-    <!-- <button *ngIf="show" class="btn btn-danger">Supprimer de mes favoris</button> -->
+    </div>
 </div>

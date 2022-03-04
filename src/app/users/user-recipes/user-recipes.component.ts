@@ -24,6 +24,7 @@ export class UserRecipesComponent implements OnInit {
   currentUserToken: any
 
   relationships: Relationships
+  p: number = 1;
 
   show = true
 
