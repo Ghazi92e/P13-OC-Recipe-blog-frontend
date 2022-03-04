@@ -22,6 +22,8 @@ export class HeaderComponent implements OnInit {
 
   display = false
 
+  datatest: any
+
   constructor(public router: Router, private userService: UsersService, private formBuilder: FormBuilder, private recipeService: RecipesService) { this.headerForm = this.formBuilder.group({recipedata: ['', Validators.required]}), this.user = { id: 0, username: '', password: '', email: '', file: 0, image_url: '' } }
 
   ngOnInit(): void {
@@ -67,7 +69,6 @@ export class HeaderComponent implements OnInit {
   
 
   getHeader() {
-    console.log(this.getUserFollowing)
     let recipedata = this.headerForm?.get('recipedata')?.value;
     const UppercaseSearchbar = recipedata.charAt(0).toUpperCase() + recipedata.slice(1)
     console.log(UppercaseSearchbar)
@@ -77,6 +78,4 @@ export class HeaderComponent implements OnInit {
     }
     this.recipeService.subject.next(obj)
   }
-
-
 }
