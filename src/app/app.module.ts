@@ -28,6 +28,7 @@ import { UsersListComponent } from './users/users-list/users-list.component';
 import { UserRecipesComponent } from './users/user-recipes/user-recipes.component';
 import { SearchBarRecipesComponent } from './search-bar-recipes/search-bar-recipes.component';
 import { EditDashboardComponent } from './authentication/edit-dashboard/edit-dashboard.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { EditDashboardComponent } from './authentication/edit-dashboard/edit-das
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule
   ],
   providers: [RecipesService, UsersService, CategoryService, CommentService, UploadfileService, FavoriteRecipesService],
   bootstrap: [AppComponent]
