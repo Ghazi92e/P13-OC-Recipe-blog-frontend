@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Recipe } from '../_models/Recipe.model';
-import { observable, Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 const url = 'http://127.0.0.1:8000/api-recipes/'
 
@@ -11,7 +11,7 @@ const url = 'http://127.0.0.1:8000/api-recipes/'
 
 export class RecipesService {
 
-  subject = new Subject<object>();
+  getDataSubjectRecipe = new Subject<any>();
 
   constructor(private http: HttpClient) {}
 
