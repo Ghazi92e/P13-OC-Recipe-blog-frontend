@@ -1,12 +1,23 @@
+h2, p {
+    font-family: caslon-webfont,Georgia,serif;
+}
+
 .block-recipes {
     margin-right: 50px;
     margin-bottom: 50px;
     cursor: pointer;
+
 }
 
 h2 {
     margin-bottom: 50px;
     margin-top: 50px;
+    font-weight: 400;
+    font-size: 25px;
+}
+
+p {
+    font-size: 18px;
 }
 
 .block-user {
@@ -15,4 +26,12 @@ h2 {
 
 button {
     margin-top: 5px;
+}
+
+.block-recipes img {
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+    border-radius: 35px;
+    max-width: 250px;
+    width: 100%;
+    height: auto;
 }
