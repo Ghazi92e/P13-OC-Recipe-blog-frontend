@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RecipesListComponent } from './recipes/recipes-list/recipes-list.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UsersService } from './_services/users.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SignInComponent } from './authentication/sign-in/sign-in.component';
@@ -29,6 +29,8 @@ import { UserRecipesComponent } from './users/user-recipes/user-recipes.componen
 import { SearchBarRecipesComponent } from './search-bar-recipes/search-bar-recipes.component';
 import { EditDashboardComponent } from './authentication/edit-dashboard/edit-dashboard.component';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { AuthInterceptor } from './http-interceptors/auth-interceptor';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 
 @NgModule({
@@ -57,9 +59,10 @@ import {NgxPaginationModule} from 'ngx-pagination';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    CKEditorModule
   ],
-  providers: [RecipesService, UsersService, CategoryService, CommentService, UploadfileService, FavoriteRecipesService],
+  providers: [RecipesService, UsersService, CategoryService, CommentService, UploadfileService, FavoriteRecipesService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }, ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
