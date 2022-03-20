@@ -5,6 +5,8 @@ import { Users } from '../_models/Users.model';
 import { UsersService } from '../_services/users.service';
 import { Output, EventEmitter } from '@angular/core';
 import { RecipesService } from '../_services/recipes.service';
+import { Subscription } from 'rxjs';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -24,7 +26,9 @@ export class HeaderComponent implements OnInit {
 
   datatest: any
 
-  constructor(public router: Router, private userService: UsersService, private formBuilder: FormBuilder, private recipeService: RecipesService) { this.headerForm = this.formBuilder.group({recipedata: ['', Validators.required]}), this.user = { id: 0, username: '', password: '', email: '', file: 0, image_url: '' } }
+  getFollowingUser: Subscription | any
+
+  constructor(public router: Router, private userService: UsersService, private formBuilder: FormBuilder, private recipeService: RecipesService) { this.headerForm = this.formBuilder.group({recipedata: ['', Validators.required]}), this.user = { id: 0, username: '', password: '', email: '', file: 0, image_url: '', is_superuser: false } }
 
   ngOnInit(): void {
     this.currentuser = localStorage.getItem('token');
@@ -33,12 +37,6 @@ export class HeaderComponent implements OnInit {
     } else {
       console.log("je suis co")
     }
-
-    this.userService.getCurrentUser(this.currentuser).subscribe(data => {
-      this.user = data[0]
-      this.getFollowingCurrentUser(this.user.id)
-      console.log(this.user)
-    })
 
     console.log(this.router.url)
   }
@@ -54,28 +52,37 @@ export class HeaderComponent implements OnInit {
 
   getFollowingCurrentUser(currentuserid: any) {
     console.log(currentuserid)
-    this.getUserFollowing.push(currentuserid)
-    this.userService.getFollowingUser(currentuserid).subscribe(data => {
-      this.currentFollowingUser = data
-
-      console.log(this.currentFollowingUser)
-      
-      for (let data of this.currentFollowingUser) {
-        this.getUserFollowing.push(data.user_following[0])
-      }
-      console.log(this.getUserFollowing)
-    })
+    
   }
   
 
   getHeader() {
-    let recipedata = this.headerForm?.get('recipedata')?.value;
-    const UppercaseSearchbar = recipedata.charAt(0).toUpperCase() + recipedata.slice(1)
-    console.log(UppercaseSearchbar)
-    const obj = {
-      "title": UppercaseSearchbar,
-      "user__in": this.getUserFollowing
-    }
-    this.recipeService.subject.next(obj)
+    this.userService.getCurrentUser(this.currentuser).subscribe(data => {
+      this.user = data[0]
+      
+      this.getFollowingUser = this.userService.getFollowingUser(this.user.id).subscribe(data => {
+        console.log(data)
+        this.getUserFollowing = data
+        
+        let recipedata = this.headerForm?.get('recipedata')?.value;
+        const UppercaseSearchbar = recipedata.charAt(0).toUpperCase() + recipedata.slice(1)
+        console.log(UppercaseSearchbar)
+
+        const obj = {
+          "title": UppercaseSearchbar,
+          "user__in": this.getUserFollowing
+        }
+
+        this.userService.searchRecipesByUserFollowing(obj).subscribe(data => {
+          this.recipesFollowingsUserHeader = data
+          console.log(this.recipesFollowingsUserHeader)
+          this.recipeService.getDataSubjectRecipe.next(this.recipesFollowingsUserHeader)
+        })
+      })
+    })
+  }
+
+  ngOnDestroy() {
+    if(this.getFollowingUser) this.getFollowingUser.unsubscribe();
   }
 }

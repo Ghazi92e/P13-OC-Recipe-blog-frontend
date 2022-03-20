@@ -1,3 +1,7 @@
+h1, p {
+    font-family: caslon-webfont,Georgia,serif;
+}
+
 .block-user {
     background-color: #F2F2F2;
     cursor: pointer;
@@ -9,4 +13,8 @@
 h1 {
     text-align: center;
     margin: 30px;
+}
+
+p {
+    font-size: 18px;
 }

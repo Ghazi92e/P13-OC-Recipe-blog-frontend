@@ -22,7 +22,8 @@ export class DashboardComponent implements OnInit {
     password: '',
     email: '',
     file: 0,
-    image_url: ''
+    image_url: '',
+    is_superuser: false
     }
 
     this.fileupload = { id: 0, file: ''}

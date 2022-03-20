@@ -29,7 +29,8 @@ export class EditDashboardComponent implements OnInit {
       password: '',
       email: '',
       file: 0,
-      image_url: ''
+      image_url: '',
+      is_superuser: false
     }
 
     this.messageFileUploaded = ''

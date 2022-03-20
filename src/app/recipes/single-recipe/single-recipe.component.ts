@@ -18,7 +18,7 @@ export class SingleRecipeComponent implements OnInit {
 
   @Input() recipe: Recipe
   currentuser: any
-  user: Users[] = []
+  user: Users[]
   id = this.route.snapshot.params['id'];
   fileupload: FileUpload
   addfavRecipe: FavoriteRecipe
@@ -27,19 +27,16 @@ export class SingleRecipeComponent implements OnInit {
   show = false
 
   constructor(private recipesService: RecipesService, private route: ActivatedRoute, private router: Router, private userService: UsersService, private uploadFileService: UploadfileService, private favoriteRecipeService: FavoriteRecipesService) 
-  { this.recipe = {id: 0, title:'', description: '', category: 0, file: 0, user: 0, image_url: ''}
+  { this.recipe = {id: 0, title:'', description: '', category: 0, file: 0, user: 0, image_url: '', ingredients: ''}
     this.fileupload = { id: 0, file: ''}
     this.addfavRecipe = {id: 0, user: 0, recipe: 0}
+    this.user = [{id: 0, username:'', email:'', password:'', file: 0, image_url: '', is_superuser: false }]
   }
 
   ngOnInit(): void {
     this.recipesService.getSingleRecipe(this.id).subscribe(data => {
       this.recipe = data
       console.log(data)
-      this.uploadFileService.getSingleFile(this.recipe.file).subscribe(data => {
-        this.fileupload = data
-        console.log("je suis le single file" + data)
-      })
     })
 
     this.currentuser = localStorage.getItem('token');
