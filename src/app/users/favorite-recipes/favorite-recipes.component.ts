@@ -21,11 +21,10 @@ export class FavoriteRecipesComponent implements OnInit {
   userFavoriteRecipes: any[] = []
   // allFileUpload: FileUpload[] = []
   FileRecipe: FileUpload[] = []
-  p: number = 1;
 
   constructor(private favoriteRecipeService: FavoriteRecipesService, private userService: UsersService, private recipesService: RecipesService, private uploadFileService: UploadfileService, private router: Router) 
   { 
-    this.user = { id: 0, username: '', password: '', email: '', file: 0 , image_url: '', is_superuser: false }
+    this.user = { id: 0, username: '', password: '', email: '', file: 0 , image_url: ''}
   }
 
   ngOnInit(): void {
@@ -35,6 +34,11 @@ export class FavoriteRecipesComponent implements OnInit {
       console.log(this.user.id)
       this.getUserFavoriteRecipe(this.user.id)
     })
+
+    // this.uploadFileService.getFile().subscribe(data => {
+    //   this.allFileUpload = data
+    //   console.log(this.allFileUpload)
+    // })
   }
 
   getUserFavoriteRecipe(userid: any) {
@@ -46,6 +50,18 @@ export class FavoriteRecipesComponent implements OnInit {
       console.log(error)
     })
   }
+
+  // getSingleRecipe(id: number) {
+  //   this.recipesService.getSingleRecipe(id).subscribe(dataSingleRecipe => {
+  //     this.getSingleFile(dataSingleRecipe.file)
+  //     this.userService.getSingleUser(dataSingleRecipe.user).subscribe(dataSingleUser => {
+  //       if (dataSingleRecipe.user == dataSingleUser.id) {
+  //         this.recipes.push(dataSingleRecipe)
+  //         this.getUserRecipes.push(dataSingleUser)
+  //       }
+  //     })
+  //   })
+  // }
 
   getSingleFile(id: number) {
     this.uploadFileService.getSingleFile(id).subscribe(data => {

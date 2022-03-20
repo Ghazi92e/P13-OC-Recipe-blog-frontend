@@ -1,10 +1,12 @@
 <div class="row">
-    <h3 class="text-center" style="margin-top: 50px; margin-bottom: 20px;">Ajoutez un commentaire !</h3>
-    <form [formGroup]="commentForm" (ngSubmit)="getComment()">
-        <div class="block-create-comment">
-            <!-- <label for="exampleFormControlTextarea1" class="form-label">Ajouter mon commentaire</label> -->
-            <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Ecrivez votre commentaire ici !" rows="3" formControlName="description"></textarea>
-            <input type="button" class="btn btn-primary" style="margin-top: 10px;" value="Ajouter mon commentaire" type="submit">
-        </div>
-    </form>
+    <h3 class="text-center">Ajoutez un commentaire !</h3>
+    <div class="col-4">
+        <form [formGroup]="commentForm" (ngSubmit)="getComment()">
+            <div class="mb-3">
+                <!-- <label for="exampleFormControlTextarea1" class="form-label">Ajouter mon commentaire</label> -->
+                <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Ecrivez votre commentaire ici !" rows="3" formControlName="description"></textarea>
+            </div>
+            <input type="button" class="btn btn-primary" value="Ajouter mon commentaire" type="submit">
+        </form>
+    </div>
 </div>

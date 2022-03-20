@@ -5,7 +5,6 @@ export class Users {
     password: string
     file: number
     image_url: string
-    is_superuser: boolean
 
     constructor() {
         this.id = 0
@@ -14,6 +13,5 @@ export class Users {
         this.password = ''
         this.file = 1
         this.image_url = ''
-        this.is_superuser = false
     }
 }

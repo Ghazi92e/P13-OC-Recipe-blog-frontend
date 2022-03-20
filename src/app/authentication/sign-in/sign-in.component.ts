@@ -23,13 +23,12 @@ export class SignInComponent implements OnInit {
     password: '',
     email: '',
     file: 1,
-    image_url: '',
-    is_superuser: false
+    image_url: ''
     }
   }
 
   ngOnInit(): void {
-    // this.currentuser = localStorage.getItem('token');
+    this.currentuser = localStorage.getItem('token');
     this.initForm()
     if (this.currentuser == null) {
       console.log("je suis deco")

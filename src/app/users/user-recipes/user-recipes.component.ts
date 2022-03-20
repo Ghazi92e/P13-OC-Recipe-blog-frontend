@@ -28,13 +28,9 @@ export class UserRecipesComponent implements OnInit {
 
   show = true
 
-  countUserFollower: any
-  countUserFollowing: any
-  countUserRecipes: any
-
   constructor(private usersService: UsersService, private route: ActivatedRoute, private router: Router) { 
-    this.user = { id: 0, username: '', email: '', password: '', file: 0, image_url: '', is_superuser: false}, 
-    this.currentuser = { id: 0, username: '', email: '', password: '', file: 0, image_url: '', is_superuser: false},
+    this.user = { id: 0, username: '', email: '', password: '', file: 0, image_url: '' }, 
+    this.currentuser = { id: 0, username: '', email: '', password: '', file: 0, image_url: '' },
     this.relationships = {id: 0, user_follower: [0], user_following: [0] } }
 
   ngOnInit(): void {
@@ -54,18 +50,6 @@ export class UserRecipesComponent implements OnInit {
       console.log(data)
       this.user = data
     })
-
-    this.usersService.getCountUserFollower(this.userid).subscribe(data => {
-      this.countUserFollower = data
-    })
-
-    this.usersService.getCountUserFollowing(this.userid).subscribe(data => {
-      this.countUserFollowing = data
-    })
-
-    this.usersService.getCountUserRecipes(this.userid).subscribe(data => {
-      this.countUserRecipes = data
-    })
   }
 
   getCurrentUserFollowingUser(currentUserId: any) {
@@ -74,10 +58,10 @@ export class UserRecipesComponent implements OnInit {
       console.log(this.userFollowing)
       for (let userFoll of this.userFollowing) {
         console.log(this.currentuser.id)
-        if (this.userid == userFoll) {
+        if (this.userid == userFoll.user_following[0]) {
           this.show = false
           console.log(currentUserId)
-          console.log(userFoll)
+          console.log(userFoll.user_following[0])
         }
       }
     })
@@ -96,7 +80,6 @@ export class UserRecipesComponent implements OnInit {
     this.usersService.createFollowingUser(this.currentuser.id, this.relationships).subscribe(data => {
       console.log(data)
       this.show = false
-      this.countUserFollower = this.countUserFollower + 1
     }, error => {
       console.log(error)
     })
@@ -114,7 +97,6 @@ export class UserRecipesComponent implements OnInit {
     this.usersService.deleteFollowingUser(this.currentuser.id, options).subscribe(data => {
       console.log(data)
       this.show = true
-      this.countUserFollower = this.countUserFollower - 1
     }, error => {
       console.log(error)
     })

@@ -1,4 +1,3 @@
-
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,7 +10,6 @@ import { UsersService } from 'src/app/_services/users.service';
 import Swal from 'sweetalert2';
 import { Recipe } from '../../_models/Recipe.model';
 import { RecipesService } from '../../_services/recipes.service';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-create-recipe',
@@ -26,8 +24,6 @@ export class CreateRecipeComponent implements OnInit {
     this._recipe = recipe
     this.initForm()
   }
-  public Editor = ClassicEditor;
-
   recipeForm: FormGroup | any
   allCategories: Category[]
   currentuser: any
@@ -36,8 +32,8 @@ export class CreateRecipeComponent implements OnInit {
   currentFileUpload: FileUpload | any;
   recipeFile: any
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private recipeService: RecipesService, private categoryService: CategoryService, private userService: UsersService, private route: ActivatedRoute, private uploadFileService: UploadfileService) 
-  { this._recipe = {id: 0, title: '', description: '', file: 0, category: 0, user: 0, image_url: '', ingredients: ''}, this.allCategories = [{id: 0, name: ''}], this.user = [{id: 0, username:'', email:'', password:'', file: 0, image_url: '', is_superuser: false }] }
+  constructor(private formBuilder: FormBuilder, private router: Router, private recipeService: RecipesService, private categoryService: CategoryService, private userService: UsersService, private route: ActivatedRoute, private uploadFileService: UploadfileService ) 
+  { this._recipe = {id: 0, title: '', description: '', file: 0, category: 0, user: 0, image_url: ''}, this.allCategories = [{id: 0, name: ''}], this.user = [{id: 0, username:'', email:'', password:'', file: 0, image_url: '' }] }
 
   ngOnInit(): void {
     this.initForm()
@@ -58,7 +54,6 @@ export class CreateRecipeComponent implements OnInit {
         description: ['', Validators.required],
         file: [''],
         categories: ['', Validators.required],
-        ingredients: ['', Validators.required],
       });
     } else {
       if (this._recipe.file) {
@@ -72,7 +67,6 @@ export class CreateRecipeComponent implements OnInit {
         description: [this._recipe.description, Validators.required],
         file: [this._recipe.file],
         categories: [this._recipe.category, Validators.required],
-        ingredients: [this._recipe.ingredients, Validators.required],
       })
     }
   }
@@ -119,7 +113,6 @@ export class CreateRecipeComponent implements OnInit {
     const description = this.recipeForm?.get('description')?.value;
     const category = this.recipeForm?.get('categories')?.value;
     const user = this.user[0].id
-    const ingredients = this.recipeForm?.get('ingredients')?.value;
 
     console.log(this._recipe)
 
@@ -128,8 +121,6 @@ export class CreateRecipeComponent implements OnInit {
     this._recipe.description = description
     this._recipe.category = category
     this._recipe.user = user
-    this._recipe.ingredients = ingredients
-  
     if(this.currentFileUpload && this.currentFileUpload.file != null) {
       this._recipe.file = this.currentFileUpload.id
       this._recipe.image_url = this.currentFileUpload.file
