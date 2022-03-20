@@ -4,3 +4,21 @@
     font-size: 20px;
     font-family: "Open Sans";
 }
+
+.ingredient-block {
+    line-height: 30px;
+}
+
+h2 {
+    margin: 20px;
+    color: #333;
+    font-family: caslon-webfont,Georgia,serif;
+    font-style: normal;
+    font-weight: 400;
+}
+
+img {
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+    border-radius: 35px;
+    margin-bottom: 20px;
+}
