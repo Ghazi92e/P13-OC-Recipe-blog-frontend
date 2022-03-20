@@ -23,7 +23,8 @@ export class SignInComponent implements OnInit {
     password: '',
     email: '',
     file: 1,
-    image_url: ''
+    image_url: '',
+    is_superuser: false
     }
   }
 

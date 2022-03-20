@@ -28,7 +28,8 @@ export class SignUpComponent implements OnInit {
       password: '',
       email: '',
       file: 0,
-      image_url: ''
+      image_url: '',
+      is_superuser: false
     }
   }
 
@@ -66,7 +67,8 @@ export class SignUpComponent implements OnInit {
       email: email,
       password: password,
       file: file,
-      image_url: image_url
+      image_url: image_url,
+      is_superuser: false
     }
 
     console.log(this.user)
