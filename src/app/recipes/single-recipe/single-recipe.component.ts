@@ -27,7 +27,7 @@ export class SingleRecipeComponent implements OnInit {
   show = false
 
   constructor(private recipesService: RecipesService, private route: ActivatedRoute, private router: Router, private userService: UsersService, private uploadFileService: UploadfileService, private favoriteRecipeService: FavoriteRecipesService) 
-  { this.recipe = {id: 0, title:'', description: '', category: 0, file: 0, user: 0, image_url: ''}
+  { this.recipe = {id: 0, title:'', description: '', category: 0, file: 0, user: 0, image_url: '', ingredients: ''}
     this.fileupload = { id: 0, file: ''}
     this.addfavRecipe = {id: 0, user: 0, recipe: 0}
   }

@@ -12,6 +12,7 @@ const user_auth = 'http://127.0.0.1:8000/api-token-auth/'
 export class UsersService {
 
   userFollowingsData = new Subject<object>();
+  user_token: any
 
   constructor(private http: HttpClient) { }
 
@@ -33,6 +34,11 @@ export class UsersService {
 
   getCurrentUser(user_token: string) {
     return this.http.get<Users[]>(`${url}?auth_token=${user_token}`);
+  }
+
+  getAuthorizationToken() {
+    this.user_token = localStorage.getItem('token');
+    return this.user_token
   }
 
   getSingleUser(id: any) {

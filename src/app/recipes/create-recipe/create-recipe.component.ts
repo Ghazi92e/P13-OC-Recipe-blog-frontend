@@ -33,7 +33,7 @@ export class CreateRecipeComponent implements OnInit {
   recipeFile: any
 
   constructor(private formBuilder: FormBuilder, private router: Router, private recipeService: RecipesService, private categoryService: CategoryService, private userService: UsersService, private route: ActivatedRoute, private uploadFileService: UploadfileService ) 
-  { this._recipe = {id: 0, title: '', description: '', file: 0, category: 0, user: 0, image_url: ''}, this.allCategories = [{id: 0, name: ''}], this.user = [{id: 0, username:'', email:'', password:'', file: 0, image_url: '' }] }
+  { this._recipe = {id: 0, title: '', description: '', file: 0, category: 0, user: 0, image_url: '', ingredients: ''}, this.allCategories = [{id: 0, name: ''}], this.user = [{id: 0, username:'', email:'', password:'', file: 0, image_url: '' }] }
 
   ngOnInit(): void {
     this.initForm()
