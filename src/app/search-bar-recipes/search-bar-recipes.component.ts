@@ -1,9 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Users } from '../_models/Users.model';
+import { Subscription } from 'rxjs';
 import { RecipesService } from '../_services/recipes.service';
-import { UsersService } from '../_services/users.service';
 
 @Component({
   selector: 'app-search-bar-recipes',
@@ -14,28 +12,26 @@ export class SearchBarRecipesComponent implements OnInit {
 
 
   recipesFollowingsUserHeader: any[] = []
-  datasearchbar: any
+  serachBar: Subscription | any
+  p: number = 1;
 
-  datatest: any
 
-  constructor(private userService: UsersService, private router: Router, private recipeService: RecipesService) { this.datasearchbar = {title: '', user__in: '' } }
+  constructor(private router: Router, private recipeService: RecipesService) { }
 
   ngOnInit(): void {
-    this.userService.userFollowingsData.subscribe(data => {
-      this.datatest = data
-      console.log(this.datatest)
-    })
-
-    this.recipeService.subject.subscribe(data => {
-      this.datasearchbar = data
-      this.userService.searchRecipesByUserFollowing(this.datasearchbar).subscribe(data => {
-        this.recipesFollowingsUserHeader = data
-        console.log(this.recipesFollowingsUserHeader)
-      })
+    this.serachBar = this.recipeService.getDataSubjectRecipe.subscribe(data => {
+      this.recipesFollowingsUserHeader = data
+      console.log(this.recipesFollowingsUserHeader)
+      this.p = 1
     })
   }
 
   onViewRecipe(id: number) {
     this.router.navigate(['/recipe', 'view', id]);
   }
+
+  ngOnDestroy() {
+    if(this.serachBar) this.serachBar.unsubscribe();
+  }
+
 }
