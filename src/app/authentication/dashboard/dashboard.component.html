@@ -5,7 +5,7 @@
             <p> Username: {{ user.username }}</p>
             <p> Email: {{ user.email }}</p>
             <p>Photo de profil:</p>
-            <img [src]=user.image_url style="width: 120px;" />
+            <img [src]=user.image_url style="width: 120px; border-radius: 100px;"/>
             <div>
                 <button class="btn btn-primary" style="margin-top: 30px;" routerLink="/edit-dashboard">Modifier ma photo de profil</button>
             </div>
