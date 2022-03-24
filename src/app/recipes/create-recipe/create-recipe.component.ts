@@ -37,7 +37,40 @@ export class CreateRecipeComponent implements OnInit {
   recipeFile: any
 
   constructor(private formBuilder: FormBuilder, private router: Router, private recipeService: RecipesService, private categoryService: CategoryService, private userService: UsersService, private route: ActivatedRoute, private uploadFileService: UploadfileService) 
-  { this._recipe = {id: 0, title: '', description: '', file: 0, category: 0, user: 0, image_url: '', ingredients: ''}, this.allCategories = [{id: 0, name: ''}], this.user = [{id: 0, username:'', email:'', password:'', file: 0, image_url: '', is_superuser: false }] }
+  { this._recipe = {id: 0, title: '', description: '', file: 0, category: 0, user: 0, image_url: '', ingredients: ''}, this.allCategories = [{id: 0, name: ''}], this.user = [{id: 0, username:'', email:'', password:'', file: 0, image_url: '', is_superuser: false }] 
+    ClassicEditor.defaultConfig = {
+      toolbar: {
+        items: [
+          'heading',
+          '|',
+          'bold',
+          'italic',
+          '|',
+          'bulletedList',
+          'numberedList',
+          '|',
+          'insertTable',
+          '|',
+          // 'imageUpload',
+          '|',
+          'undo',
+          'redo'
+        ]
+      },
+      image: {
+        toolbar: [
+          // 'imageStyle:full',
+          'imageStyle:side',
+          '|',
+          'imageTextAlternative'
+        ]
+      },
+      table: {
+        contentToolbar: [ 'tableColumn', 'tableRow', 'mergeTableCells' ]
+      },
+      language: 'fr'
+    };
+  }
 
   ngOnInit(): void {
     this.initForm()
