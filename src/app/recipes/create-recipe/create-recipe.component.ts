@@ -49,7 +49,7 @@ export class CreateRecipeComponent implements OnInit {
           'bulletedList',
           'numberedList',
           '|',
-          'insertTable',
+          // 'insertTable',
           '|',
           // 'imageUpload',
           '|',
@@ -180,6 +180,7 @@ export class CreateRecipeComponent implements OnInit {
       //   console.log(error)
       // })
       console.log("je suis le recipe file" + this._recipe.file)
+      this._recipe.title = this._recipe.title.charAt(0).toUpperCase() + this._recipe.title.slice(1)
       const id = this.route.snapshot.params['id'];
       this.recipeService.updateRecipe(id, this._recipe).subscribe(response => {
         console.log(response)
@@ -190,6 +191,8 @@ export class CreateRecipeComponent implements OnInit {
         console.log(error)
       })
     } else {
+      this._recipe.title = this._recipe.title.charAt(0).toUpperCase() + this._recipe.title.slice(1)
+      console.log(this._recipe.title)
       this.recipeService.createRecipe(this._recipe).subscribe( response => {
         console.log(response);
         console.log("recette crée");
