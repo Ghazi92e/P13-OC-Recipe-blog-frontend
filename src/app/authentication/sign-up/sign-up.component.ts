@@ -18,7 +18,8 @@ export class SignUpComponent implements OnInit {
   user: Users
   userForm: FormGroup | any;
   currentFileUpload: FileUpload | any;
-
+  file: any
+  image_url: any
 
 
   constructor(private usersService: UsersService, private router: Router, private formBuilder: FormBuilder, private uploadFileService: UploadfileService) {
@@ -50,15 +51,12 @@ export class SignUpComponent implements OnInit {
     const email = this.userForm?.get('email')?.value;
     const password = this.userForm?.get('password')?.value;
 
-    let file
-    let image_url
-
     if (this.currentFileUpload && this.currentFileUpload.file != null) {
-      file = this.currentFileUpload.id
-      image_url = this.currentFileUpload.file
+      this.file = this.currentFileUpload.id
+      this.image_url = this.currentFileUpload.file
     } else {
-      file = 1
-      image_url = 'http://127.0.0.1:8000/media/profil.png'
+      this.file = 1
+      this.image_url = 'http://127.0.0.1:8000/media/profil.png'
     }
 
     this.user = {
@@ -66,8 +64,8 @@ export class SignUpComponent implements OnInit {
       username: username,
       email: email,
       password: password,
-      file: file,
-      image_url: image_url,
+      file: this.file,
+      image_url: this.image_url,
       is_superuser: false
     }
 
