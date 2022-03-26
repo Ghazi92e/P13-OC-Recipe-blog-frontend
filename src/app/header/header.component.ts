@@ -24,25 +24,26 @@ export class HeaderComponent implements OnInit {
 
   getFollowingUser: Subscription | any
 
-  constructor(public router: Router, private userService: UsersService, private formBuilder: FormBuilder, private recipeService: RecipesService) { this.headerForm = this.formBuilder.group({recipedata: ['', Validators.required]}), this.user = { id: 0, username: '', password: '', email: '', file: 0, image_url: '', is_superuser: false } }
+  userconnected: boolean
+
+  constructor(public router: Router, private userService: UsersService, private formBuilder: FormBuilder, private recipeService: RecipesService) { this.headerForm = this.formBuilder.group({recipedata: ['', Validators.required]}), this.user = { id: 0, username: '', password: '', email: '', file: 0, image_url: '', is_superuser: false }, this.userconnected = false }
 
   ngOnInit(): void {
     this.currentuser = localStorage.getItem('token');
     if (this.currentuser == null) {
       console.log("je suis deco")
+      this.userconnected = false
     } else {
+      this.userconnected = true
       console.log("je suis co")
     }
-
-    console.log(this.router.url)
   }
 
   signOut() {
     console.log("je suis dans signOut")
     localStorage.removeItem('token');
-    this.router.navigate(['sign-in']).then(() => {
-      window.location.reload()
-    });
+    this.userconnected = false
+    this.router.navigate(['sign-in'])
   }
 
 

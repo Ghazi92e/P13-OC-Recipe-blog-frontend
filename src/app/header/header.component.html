@@ -9,27 +9,27 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li routerLinkActive="active" *ngIf="currentuser == null">
-                    <a routerLink="sign-up" class="nav-item nav-link">Créer un compte</a>
+                <li routerLinkActive="active" *ngIf="!userconnected">
+                    <a routerLink="sign-up" class="nav-item nav-link" style="margin-right: 50px">Créer un compte</a>
                 </li>
-                <li routerLinkActive="active" *ngIf="currentuser == null">
+                <li routerLinkActive="active" *ngIf="!userconnected">
                     <a routerLink="sign-in" class="nav-item nav-link">Connexion</a>
                 </li>
-                <li routerLinkActive="active" *ngIf="currentuser" style="margin-right: 30px;">
+                <li routerLinkActive="active" *ngIf="userconnected" style="margin-right: 30px;">
                     <a routerLink="recipes" class="nav-item nav-link">Recettes</a>
                 </li>
-                <li routerLinkActive="active" *ngIf="currentuser">
+                <li routerLinkActive="active" *ngIf="userconnected">
                     <a routerLink="users-list" class="nav-item nav-link">Users</a>
                 </li>
             </ul>
 
-            <form [formGroup]="headerForm" (ngSubmit)="getHeader()" class="d-flex" style="margin-right: 100px;" >
+            <form [formGroup]="headerForm" (ngSubmit)="getHeader()" class="d-flex" style="margin-right: 100px;" *ngIf="userconnected">
                 <input class="form-control me-2" type="search" placeholder="Entrez le nom d'une recette" aria-label="Search" formControlName="recipedata">
                 <button class="btn btn-outline-success" routerLink="/search-recipe" type="submit">Search</button>
             </form>
 
             <ul class="navbar-nav" style="margin-right: 150px;">
-                <li class="nav-item dropdown" routerLinkAcrive="active" *ngIf="currentuser">
+                <li class="nav-item dropdown" routerLinkAcrive="active" *ngIf="userconnected">
                     <a class="nav-link" href="/" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                             <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
@@ -37,13 +37,13 @@
                         </svg>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="width: 200px; padding-left: 10px;">
-                        <li routerLinkActive="active" *ngIf="currentuser">
+                        <li routerLinkActive="active" *ngIf="userconnected">
                             <a routerLink="favoriterecipes" class="nav-item nav-link">Mes Recettes favorites</a>
                         </li>
-                        <li routerLinkActive="active" *ngIf="currentuser">
+                        <li routerLinkActive="active" *ngIf="userconnected">
                             <a routerLink="dashboard" class="nav-item nav-link">Dashboard</a>
                         </li>
-                        <li class="d-flex" routerLinkActive="active" *ngIf="currentuser">
+                        <li class="d-flex" routerLinkActive="active" *ngIf="userconnected">
                             <a class="nav-item nav-link" (click)="signOut()">
                                 Sign Out
                             </a>
