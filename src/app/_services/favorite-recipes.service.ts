@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FavoriteRecipe } from '../_models/FavoriteRecipe.model';
 
-const url = 'http://127.0.0.1:8000/api-favoriterecipe/'
+const url = 'http://127.0.0.1:8000/api/favoriterecipe/'
 
 @Injectable({
   providedIn: 'root'

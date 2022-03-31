@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Recipe } from '../_models/Recipe.model';
 import { Subject } from 'rxjs';
 
-const url = 'http://127.0.0.1:8000/api-recipes/'
+const url = 'http://127.0.0.1:8000/api/recipes/'
 
 @Injectable({
   providedIn: 'root'

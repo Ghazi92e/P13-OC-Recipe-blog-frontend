@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Users } from '../_models/Users.model';
 import { Observable, Subject } from 'rxjs';
 
-const url = 'http://127.0.0.1:8000/api-users/'
-const user_auth = 'http://127.0.0.1:8000/api-token-auth/'
+const url = 'http://127.0.0.1:8000/api/users/'
+const user_auth = 'http://127.0.0.1:8000/api/api-token-auth/'
 @Injectable({
   providedIn: 'root'
 })
