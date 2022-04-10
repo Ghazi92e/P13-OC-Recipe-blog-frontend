@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FileUpload } from '../_models/Fileupload.model';
 
-const url = 'http://127.0.0.1:8000/api/upload-file/'
+const url = 'http://161.35.214.115:80/api/upload-file/'
 
 @Injectable({
   providedIn: 'root'

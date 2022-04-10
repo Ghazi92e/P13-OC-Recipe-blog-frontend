@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Comment } from '../_models/Comment.model';
 
-const url = 'http://127.0.0.1:8000/api/comment/'
+const url = 'http://161.35.214.115:80/api/comment/'
 
 @Injectable({
   providedIn: 'root'

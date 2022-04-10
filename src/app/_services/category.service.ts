@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Category } from '../_models/Category.model';
 
-const url = 'http://161.35.214.115/api/categories/'
+const url = 'http://161.35.214.115:80/api/categories/'
 @Injectable({
   providedIn: 'root'
 })
