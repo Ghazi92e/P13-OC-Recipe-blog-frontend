@@ -56,7 +56,8 @@ export class SignUpComponent implements OnInit {
       this.image_url = this.currentFileUpload.file
     } else {
       this.file = 1
-      this.image_url = 'http://127.0.0.1:8000/media/profil.png'
+      // this.image_url = 'http://127.0.0.1:8000/media/profil.png'
+      this.image_url = 'http://161.35.214.115/media/photodeprofile2.jpg'
     }
 
     this.user = {
