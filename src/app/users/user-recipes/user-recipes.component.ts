@@ -35,7 +35,7 @@ export class UserRecipesComponent implements OnInit {
   constructor(private usersService: UsersService, private route: ActivatedRoute, private router: Router) { 
     this.user = { id: 0, username: '', email: '', password: '', file: 0, image_url: '', is_superuser: false}, 
     this.currentuser = { id: 0, username: '', email: '', password: '', file: 0, image_url: '', is_superuser: false},
-    this.relationships = {id: 0, user_follower: [0], user_following: [0] } }
+    this.relationships = {id: 0, user_follower: 0, user_following: 0 } }
 
   ngOnInit(): void {
     this.currentUserToken = localStorage.getItem('token');
@@ -90,8 +90,8 @@ export class UserRecipesComponent implements OnInit {
   followUser() {
     this.relationships = {
       id: 0,
-      user_follower: [this.currentuser.id],
-      user_following: [this.user.id]
+      user_follower: this.currentuser.id,
+      user_following: this.user.id
     }
     this.usersService.createFollowingUser(this.currentuser.id, this.relationships).subscribe(data => {
       console.log(data)
