@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Category } from '../_models/Category.model';
 
 const url = 'http://161.35.214.115:80/api/categories/'
+// const url = 'http://127.0.0.1:8000/api/categories/'
 @Injectable({
   providedIn: 'root'
 })
