@@ -41,8 +41,8 @@ export class SignUpComponent implements OnInit {
   initForm() {
     this.userForm = this.formBuilder.group({
       username: ['', Validators.required],
-      email: ['', Validators.required],
-      password: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.pattern(/\d/), Validators.pattern(/[A-Z]/), Validators.pattern(/[a-z]/)]],
     });
   }
 
@@ -70,12 +70,17 @@ export class SignUpComponent implements OnInit {
       is_superuser: false
     }
 
-    console.log(this.user)
     this.usersService.createUser(this.user).subscribe( response => {
       console.log(response);
       this.router.navigate(['sign-in']);
+      Swal.fire('Bavo !', "Votre compte a bien été créé.", 'success');
     },
     error => {
+      if (error.error.email) {
+        Swal.fire('Erreur', "Un utilisateur avec cet email existe déjà.", 'error');
+      } else if (error.error.username) {
+        Swal.fire('Erreur', "Un utilisateur avec ce nom d'utilisateur existe déjà.", 'error');
+      }
       console.log(error)
       console.log(error.error.email)
       console.log(error.error.username)
@@ -99,7 +104,7 @@ export class SignUpComponent implements OnInit {
               console.log(event.target.files[0].size)
               Swal.fire('Erreur image', "Image trop lourde", 'error');
             }
-            else if (width / height < 0.9) {
+            else if (width / height < 1) {
               Swal.fire('Erreur image', "Dimension de l'image non conforme", 'error');
             }
             else {
