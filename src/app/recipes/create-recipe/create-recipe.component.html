@@ -45,13 +45,15 @@
                 <div class="mb-3" style="margin-top: 10px;">
                     <label for="formFile" class="form-label">Ajoutez une image</label>
                     <input class="form-control" type="file" id="formFile" (change)="onChange($event)">
+                    <div id="recipeImageHelp" class="form-text">Dimension de l'image 600x800 requis.</div>
                 </div>
+                <p>{{ messageFileUploaded }}</p>
 
 
                 <img *ngIf="recipeFile" [src]=recipeFile style="height:100%; width: 80%; object-fit: contain;"/>
 
                 <div class="form-group" style="margin-top: 20px;">
-                    <input type="button" class="btn btn-primary" style="margin-bottom: 5px;" value="Ajouter ma recette" type="submit">
+                    <input type="button" class="btn btn-primary" style="margin-bottom: 5px;" [disabled]="!fileUploaded" value="Ajouter ma recette" type="submit">
                 </div>
             </form>
             <a class="btn btn-primary" *ngIf="user[0].is_superuser" href="/create-category" role="button" style="margin-bottom: 70px;">Ajouter une catégorie</a>

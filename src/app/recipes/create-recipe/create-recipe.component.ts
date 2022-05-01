@@ -35,6 +35,8 @@ export class CreateRecipeComponent implements OnInit {
   // selectedFiles: FileList | any;
   currentFileUpload: FileUpload | any;
   recipeFile: any
+  fileUploaded = false
+  messageFileUploaded: string
 
   constructor(private formBuilder: FormBuilder, private router: Router, private recipeService: RecipesService, private categoryService: CategoryService, private userService: UsersService, private route: ActivatedRoute, private uploadFileService: UploadfileService) 
   { this._recipe = {id: 0, title: '', description: '', file: 0, category: 0, user: 0, image_url: '', ingredients: ''}, this.allCategories = [{id: 0, name: ''}], this.user = [{id: 0, username:'', email:'', password:'', file: 0, image_url: '', is_superuser: false }] 
@@ -70,6 +72,7 @@ export class CreateRecipeComponent implements OnInit {
       },
       language: 'fr'
     };
+    this.messageFileUploaded = ''
   }
 
   ngOnInit(): void {
@@ -95,6 +98,7 @@ export class CreateRecipeComponent implements OnInit {
       });
     } else {
       if (this._recipe.file) {
+        this.fileUploaded = true
         console.log(this._recipe.file)
         this.uploadFileService.getSingleFile(this._recipe.file).subscribe(data => {
           this.recipeFile = data.file
@@ -218,6 +222,8 @@ export class CreateRecipeComponent implements OnInit {
       console.log(this.currentFileUpload.file)
       console.log(this._recipe.file)
       console.log("file Uploaded")
+      this.fileUploaded = true
+      this.messageFileUploaded = "Image téléchargée"
     }, error => {
       console.log(error)
     })
