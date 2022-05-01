@@ -1,7 +1,7 @@
 <div class="container">
-    <h2 class="text-center">Editer mon profil</h2>
+    <h2 class="text-center" style="margin-top: 50px;" >Editer mon profil</h2>
     <div class="row justify-content-center" style="margin-top: 100px;">
-        <form [formGroup]="userForm" (ngSubmit)="editUserImageAccount()" class="col-6">
+        <form [formGroup]="userForm" (ngSubmit)="editUserImageAccount()" class="col-md-6">
             <div class="form-group">
                 <!-- <label for="username">Username</label>
                 <input type="email" class="form-control"  style="margin-bottom: 10px;" placeholder="Username" formControlName="username"> -->
@@ -14,7 +14,7 @@
                 <p>{{ messageFileUploaded }}</p>
                 <!-- <p>{{ Image téléchargée }}</p> -->
         
-                <img *ngIf="user.image_url" [src]=user.image_url style="max-width: 300px;" />
+                <img *ngIf="user.image_url" [src]=user.image_url style="max-width: 300px;width: 100%;height: auto;" />
             </div>
 
             <div class="form-group" style="margin-top: 20px;">
