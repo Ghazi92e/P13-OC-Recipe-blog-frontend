@@ -10,53 +10,54 @@
   
     </form>
 </div> -->
-
-<div class="row justify-content-center" style="margin-top: 100px;">
-    <div class="col-6">
-        <div class="authBlock" style="padding-bottom: 50px;">
-            <h3>Ajoutez une recette</h3>
-            <form [formGroup]="recipeForm" (ngSubmit)="getRecipe()">
-                <div class="form-group">
-                    <label for="title">Title</label>
-                    <input type="title" class="form-control"  style="margin-bottom: 10px;" placeholder="Title" formControlName="title">
-                </div>
-
-                <div class="form-group">
-                    <label for="description">Ingrédients</label>
-                    <ckeditor [editor]="Editor" tagName="textarea" formControlName="ingredients"></ckeditor>
-                    <!-- <textarea class="form-control" aria-label="With textarea"></textarea> -->
-                    <!-- <textarea type="description" class="form-control" style="margin-bottom: 10px;"  rows="7" placeholder="Ingrédients" formControlName="ingredients"></textarea> -->
-                </div>
-
-                <div class="form-group">
-                    <label for="description">Description</label>
-                    <ckeditor [editor]="Editor" tagName="textarea" formControlName="description"></ckeditor>
-                    <!-- <textarea class="form-control" aria-label="With textarea"></textarea> -->
-                    <!-- <textarea type="description" class="form-control" style="margin-bottom: 10px;" rows="7" placeholder="Description" formControlName="description"></textarea> -->
-                </div>
-
-                <label for="categories">Categorie</label>
-                <select class="form-select" formControlName="categories">
-                    <option *ngFor="let data of allCategories" [ngValue]="data.id">
-                        {{ data.name }}
-                    </option>
-                </select>
-
-                <div class="mb-3" style="margin-top: 10px;">
-                    <label for="formFile" class="form-label">Ajoutez une image</label>
-                    <input class="form-control" type="file" id="formFile" (change)="onChange($event)">
-                    <div id="recipeImageHelp" class="form-text">Dimension de l'image 600x800 requis.</div>
-                </div>
-                <p>{{ messageFileUploaded }}</p>
-
-
-                <img *ngIf="recipeFile" [src]=recipeFile style="height:100%; width: 80%; object-fit: contain;"/>
-
-                <div class="form-group" style="margin-top: 20px;">
-                    <input type="button" class="btn btn-primary" style="margin-bottom: 5px;" [disabled]="!fileUploaded" value="Ajouter ma recette" type="submit">
-                </div>
-            </form>
-            <a class="btn btn-primary" *ngIf="user[0].is_superuser" href="/create-category" role="button" style="margin-bottom: 70px;">Ajouter une catégorie</a>
+<div class="container">
+    <div class="row justify-content-center" style="margin-top: 80px;">
+        <div class="col-md-6">
+            <div style="padding-bottom: 50px;">
+                <h3>Ajoutez une recette</h3>
+                <form [formGroup]="recipeForm" (ngSubmit)="getRecipe()">
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="title" class="form-control"  style="margin-bottom: 10px;" placeholder="Title" formControlName="title">
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="description">Ingrédients</label>
+                        <ckeditor [editor]="Editor" tagName="textarea" formControlName="ingredients"></ckeditor>
+                        <!-- <textarea class="form-control" aria-label="With textarea"></textarea> -->
+                        <!-- <textarea type="description" class="form-control" style="margin-bottom: 10px;"  rows="7" placeholder="Ingrédients" formControlName="ingredients"></textarea> -->
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <ckeditor [editor]="Editor" tagName="textarea" formControlName="description"></ckeditor>
+                        <!-- <textarea class="form-control" aria-label="With textarea"></textarea> -->
+                        <!-- <textarea type="description" class="form-control" style="margin-bottom: 10px;" rows="7" placeholder="Description" formControlName="description"></textarea> -->
+                    </div>
+    
+                    <label for="categories">Categorie</label>
+                    <select class="form-select" formControlName="categories">
+                        <option *ngFor="let data of allCategories" [ngValue]="data.id">
+                            {{ data.name }}
+                        </option>
+                    </select>
+    
+                    <div class="mb-3" style="margin-top: 10px;">
+                        <label for="formFile" class="form-label">Ajoutez une image</label>
+                        <input class="form-control" type="file" id="formFile" (change)="onChange($event)">
+                        <div id="recipeImageHelp" class="form-text">Dimension de l'image 600x800 requis.</div>
+                    </div>
+                    <p>{{ messageFileUploaded }}</p>
+    
+    
+                    <img *ngIf="recipeFile" [src]=recipeFile style="height:100%; width: 80%; object-fit: contain;"/>
+    
+                    <div class="form-group" style="margin-top: 20px;">
+                        <input type="button" class="btn btn-primary" style="margin-bottom: 5px;" [disabled]="!fileUploaded" value="Ajouter ma recette" type="submit">
+                    </div>
+                </form>
+                <a class="btn btn-primary" *ngIf="user[0].is_superuser" href="/create-category" role="button" style="margin-bottom: 70px;">Ajouter une catégorie</a>
+            </div>
         </div>
     </div>
 </div>
