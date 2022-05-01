@@ -88,7 +88,7 @@ export class EditDashboardComponent implements OnInit {
               console.log(event.target.files[0].size)
               Swal.fire('Erreur image', "Image trop lourde", 'error');
             }
-            else if (width / height < 0.9) {
+            else if (width / height < 1) {
               Swal.fire('Erreur image', "Dimension de l'image non conforme", 'error');
             }
             else if (width < 100 ) {

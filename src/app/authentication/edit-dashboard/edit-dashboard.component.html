@@ -9,6 +9,7 @@
                 <div class="mb-3" style="margin-top: 10px;">
                     <label for="formFile" class="form-label">Modifier ma photo de profil</label>
                     <input class="form-control" type="file" id="formFile" (change)="onChange($event)">
+                    <div id="userProfilePhotoHelp" class="form-text">Dimension de l'image 400x400 requis.</div>
                 </div>
                 <p>{{ messageFileUploaded }}</p>
                 <!-- <p>{{ Image téléchargée }}</p> -->
