@@ -73,7 +73,7 @@ export class SignUpComponent implements OnInit {
     this.usersService.createUser(this.user).subscribe( response => {
       console.log(response);
       this.router.navigate(['sign-in']);
-      Swal.fire('Bavo !', "Votre compte a bien été créé.", 'success');
+      Swal.fire('Bienvenue', "Votre compte a bien été créé.", 'success');
     },
     error => {
       if (error.error.email) {

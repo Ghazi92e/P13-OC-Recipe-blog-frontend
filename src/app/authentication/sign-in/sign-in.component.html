@@ -1,15 +1,15 @@
-<div class="row justify-content-center" style="margin-top: 150px;">
-    <div class="col-6">
-        <div class="authBlock">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6" style="margin-top: 150px;">
             <h3>Connexion</h3>
             <form [formGroup]="userForm" (ngSubmit)="getCurrentUser()">
                 <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="email" class="form-control"  style="margin-bottom: 10px;" placeholder="Username" formControlName="username">
+                    <label for="username">Nom utilisateur</label>
+                    <input type="email" class="form-control"  style="margin-bottom: 10px;" placeholder="Nom utilisateur" formControlName="username">
                 </div>
-
+    
                 <div class="form-group">
-                    <label for="password">Password</label>
+                    <label for="password">Mot de passe</label>
                     <input type="password" class="form-control" style="margin-bottom: 10px;" placeholder="Mot de passe" formControlName="password">
                 </div>
         
@@ -17,10 +17,9 @@
                     <input type="button" class="btn btn-primary" style="margin-bottom: 10px;" value="Se connecter" type="submit">
                 </div>
             </form>
+          <div class="redirectToLogin">
+            <span>Pas encore inscrit ?<span class="redirect" routerLink="/sign-up" style="cursor: pointer;"> Inscrivez-vous</span></span>
+          </div>
         </div>
-  
-      <div class="redirectToLogin">
-        <span>Pas encore inscrit ?<span class="redirect" routerLink="/sign-up" style="cursor: pointer;"> Inscrivez-vous</span></span>
-      </div>
     </div>
 </div>
