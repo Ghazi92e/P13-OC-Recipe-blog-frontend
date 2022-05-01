@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsersService } from '../../_services/users.service';
 import { Users } from '../../_models/Users.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-sign-in',
@@ -73,6 +74,7 @@ export class SignInComponent implements OnInit {
       // this.router.navigate(['']);
     },
     error => {
+      Swal.fire('Erreur', "Le nom d'utilisateur ou le mot de passe est incorrect.", 'error');
       console.log(error)
       console.log(error.error.email)
       console.log(error.error.username)
