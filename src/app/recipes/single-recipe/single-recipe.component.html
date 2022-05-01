@@ -14,7 +14,7 @@
             <!-- <button *ngIf="show" class="btn btn-danger">Supprimer de mes favoris</button> -->
         </div>
 
-        <div style="margin-bottom: 100px; margin-top: 30px;">
+        <div style="margin-bottom: 100px; margin-top: 30px; display:flex;">
             <button type="button" class="btn btn-danger" style="margin-right: 10px;" *ngIf="user[0] && user[0].id == recipe.user || user[0].is_superuser"(click)="deleteRecipe(recipe.id)">Supprimer la recette</button>
             <button class="btn btn-primary"  style="margin-right: 10px;" *ngIf="user[0] && user[0].id == recipe.user || user[0].is_superuser" (click)="editRecipe()">Modifier contenu</button>
             

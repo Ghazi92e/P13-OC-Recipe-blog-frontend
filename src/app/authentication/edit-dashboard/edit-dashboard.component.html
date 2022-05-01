@@ -1,6 +1,6 @@
 <div class="container">
     <h2 class="text-center" style="margin-top: 50px;" >Editer mon profil</h2>
-    <div class="row justify-content-center" style="margin-top: 100px;">
+    <div class="row justify-content-center" style="margin-top: 80px;">
         <form [formGroup]="userForm" (ngSubmit)="editUserImageAccount()" class="col-md-6">
             <div class="form-group">
                 <!-- <label for="username">Username</label>
@@ -17,7 +17,7 @@
                 <img *ngIf="user.image_url" [src]=user.image_url style="max-width: 300px;width: 100%;height: auto;" />
             </div>
 
-            <div class="form-group" style="margin-top: 20px;">
+            <div class="form-group" style="margin-top: 20px;margin-bottom: 50px;">
                 <input type="button" class="btn btn-primary" style="margin-bottom: 5px;" [disabled]="!fileUploaded" value="Modifier ma photo de profil" type="submit">
             </div>
         </form>
