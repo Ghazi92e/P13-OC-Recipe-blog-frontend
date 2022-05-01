@@ -1,13 +1,13 @@
 <div class="container">
     <h1> Users App </h1>
     <div class="row">
-        <div *ngFor="let allUsersApp of users | paginate: { itemsPerPage: 6, currentPage: p }" class="col-md-4" style="margin-bottom: 40px;">
+        <div *ngFor="let allUsersApp of users | paginate: { itemsPerPage: 6, currentPage: p }"  class="col-md-4" style="margin-bottom: 40px;">
             <div class="block-user" (click)="onViewUserRecipes(allUsersApp.id)">
                 <p>{{ allUsersApp.username }}</p>
                 <p>{{ allUsersApp.email }}</p>
                 <img [src]="allUsersApp.image_url" width="80px" style="border-radius: 50%; margin-bottom: 10px;">
             </div>
         </div>
+        <pagination-controls (pageChange)="p = $event" class="text-center" style="margin-bottom: 50px;" previousLabel="Précédent" nextLabel="Suivant"></pagination-controls>
     </div>
-    <pagination-controls (pageChange)="p = $event" class="text-center" previousLabel="Précédent" nextLabel="Suivant"></pagination-controls>
 </div>
