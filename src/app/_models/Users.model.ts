@@ -17,3 +17,17 @@ export class Users {
         this.is_superuser = false
     }
 }
+
+export class CreateUserMessage {
+    id: number
+    sender: number
+    receiver: number
+    message: string
+
+    constructor() {
+        this.id = 0
+        this.sender = 0
+        this.receiver = 0
+        this.message = ''
+    }
+}

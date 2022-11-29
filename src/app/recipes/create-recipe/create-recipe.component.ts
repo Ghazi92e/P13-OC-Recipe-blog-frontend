@@ -155,7 +155,6 @@ export class CreateRecipeComponent implements OnInit {
     const title = this.recipeForm?.get('title')?.value;
     const description = this.recipeForm?.get('description')?.value;
     const category = this.recipeForm?.get('categories')?.value;
-    const user = this.user[0].id
     const ingredients = this.recipeForm?.get('ingredients')?.value;
 
     console.log(this._recipe)
@@ -164,7 +163,11 @@ export class CreateRecipeComponent implements OnInit {
     this._recipe.title = title
     this._recipe.description = description
     this._recipe.category = category
-    this._recipe.user = user
+    if (this.route.snapshot.params['id']) {
+      this._recipe.user = this._recipe.user
+    } else {
+      this._recipe.user = this.user[0].id
+    }
     this._recipe.ingredients = ingredients
   
     if(this.currentFileUpload && this.currentFileUpload.file != null) {

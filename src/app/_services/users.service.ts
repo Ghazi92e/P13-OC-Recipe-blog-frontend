@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Users } from '../_models/Users.model';
+import { CreateUserMessage, Users } from '../_models/Users.model';
 import { Observable, Subject } from 'rxjs';
 
 const url = 'http://161.35.214.115:80/api/users/'
@@ -94,5 +94,13 @@ export class UsersService {
 
   getCountUserRecipes(id: any) {
     return this.http.get(`${url}${id}/count_user_recipes`)
+  }
+
+  createUserMessage(createusermessage: CreateUserMessage) {
+    return this.http.post(`http://161.35.214.115:80/api/user-tchat/`, createusermessage)
+  }
+
+  getUserMessage(user: any) {
+    return this.http.get<object[]>(`http://161.35.214.115:80/api/user-tchat/current_user_tchat?users-tchat=${JSON.stringify(user)}`)
   }
 }

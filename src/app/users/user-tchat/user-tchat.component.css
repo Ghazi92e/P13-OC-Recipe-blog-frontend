@@ -1,0 +1,9 @@
+#content {
+    overflow: scroll;
+    height: 500px;
+    padding: 10px;
+}
+
+#content::-webkit-scrollbar {
+    display: none;
+}

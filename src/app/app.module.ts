@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { RecipesListComponent } from './recipes/recipes-list/recipes-list.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UsersService } from './_services/users.service';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SignInComponent } from './authentication/sign-in/sign-in.component';
 import { SignUpComponent } from './authentication/sign-up/sign-up.component';
 import { HeaderComponent } from './header/header.component';
@@ -31,6 +31,7 @@ import { EditDashboardComponent } from './authentication/edit-dashboard/edit-das
 import {NgxPaginationModule} from 'ngx-pagination';
 import { AuthInterceptor } from './http-interceptors/auth-interceptor';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { UserTchatComponent } from './users/user-tchat/user-tchat.component';
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     UsersListComponent,
     UserRecipesComponent,
     SearchBarRecipesComponent,
-    EditDashboardComponent
+    EditDashboardComponent,
+    UserTchatComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +62,8 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     HttpClientModule,
     ReactiveFormsModule,
     NgxPaginationModule,
-    CKEditorModule
+    CKEditorModule,
+    FormsModule
   ],
   providers: [RecipesService, UsersService, CategoryService, CommentService, UploadfileService, FavoriteRecipesService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }, ],
   bootstrap: [AppComponent]
