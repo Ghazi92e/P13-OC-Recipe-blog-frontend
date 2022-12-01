@@ -5,12 +5,14 @@
             <img [src]=user.image_url width="100px" style="border-radius: 50%;">
             <p><button *ngIf="show && currentuser.id != userid" class="btn btn-primary" (click)="followUser()">S'abonner</button></p>
             <p><button *ngIf="!show && currentuser.id != userid" class="btn btn-primary" (click)="unsuscribeUser()">Se desabonner</button></p>
-            <div style="margin-top: 30px;">
+            <div style="margin-top: 30px; margin-bottom: 10px;">
                 <span style="margin-right: 10px;">Publications: {{ countUserRecipes }}</span>
                 <span style="margin-right: 10px;">Abonnés: {{ countUserFollower }}</span>
                 <span>Abonnements: {{ countUserFollowing }}</span>
             </div>
-           
+        </div>
+        <div class="text-center">
+            <button class="btn btn-primary" (click)="userTchat()">Envoyer un message</button>
         </div>
 
         <h2 class="text-center">Mes recettes</h2>

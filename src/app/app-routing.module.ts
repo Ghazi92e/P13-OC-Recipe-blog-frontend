@@ -15,6 +15,7 @@ import { FooterComponent } from './footer/footer.component';
 import { SearchBarRecipesComponent } from './search-bar-recipes/search-bar-recipes.component';
 import { HeaderComponent } from './header/header.component';
 import { EditDashboardComponent } from './authentication/edit-dashboard/edit-dashboard.component';
+import { UserTchatComponent } from './users/user-tchat/user-tchat.component';
 
 const routes: Routes = [
   { path: '', component: RecipesListComponent },
@@ -30,7 +31,8 @@ const routes: Routes = [
   { path: 'users-list', component: UsersListComponent },
   { path: 'user-recipe/:id', component: UserRecipesComponent },
   { path: 'search-recipe', component: SearchBarRecipesComponent },
-  { path: 'edit-dashboard', component: EditDashboardComponent }
+  { path: 'edit-dashboard', component: EditDashboardComponent },
+  { path: 'user-tchat/:id', component: UserTchatComponent },
 ];
 
 @NgModule({

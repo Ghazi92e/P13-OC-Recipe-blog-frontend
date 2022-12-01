@@ -5,8 +5,6 @@ import { Relationships } from 'src/app/_models/Relationships.model';
 import { Users } from 'src/app/_models/Users.model';
 import { RecipesService } from 'src/app/_services/recipes.service';
 import { UsersService } from 'src/app/_services/users.service';
-
-
 @Component({
   selector: 'app-user-recipes',
   templateUrl: './user-recipes.component.html',
@@ -118,6 +116,10 @@ export class UserRecipesComponent implements OnInit {
     }, error => {
       console.log(error)
     })
+  }
+
+  userTchat() {
+    this.router.navigate(['/user-tchat', this.userid]);
   }
 
 
