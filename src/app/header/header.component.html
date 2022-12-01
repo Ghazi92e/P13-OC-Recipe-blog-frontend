@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <a class="navbar-brand" style="margin-right: 70px;" routerLink="recipes">
             <img src="favicon.ico" width="30" height="30" class="d-inline-block align-top" alt="">
-            App Lebanese Recipes
+            Cuisinons
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -19,13 +19,13 @@
                     <a routerLink="recipes" class="nav-item nav-link">Recettes</a>
                 </li>
                 <li routerLinkActive="active" *ngIf="userconnected">
-                    <a routerLink="users-list" class="nav-item nav-link">Users</a>
+                    <a routerLink="users-list" class="nav-item nav-link">Utilisateurs</a>
                 </li>
             </ul>
 
             <form [formGroup]="headerForm" (ngSubmit)="getHeader()" class="d-flex" style="margin-right: 100px;" *ngIf="userconnected">
-                <input class="form-control me-2" type="search" placeholder="Entrez le nom d'une recette" aria-label="Search" formControlName="recipedata">
-                <button class="btn btn-outline-success" routerLink="/search-recipe" type="submit">Search</button>
+                <input class="form-control me-2" type="search" placeholder="Entrer le nom d'une recette" aria-label="Search" formControlName="recipedata">
+                <button class="btn btn-outline-success" routerLink="/search-recipe" type="submit">Rechercher</button>
             </form>
 
             <ul class="navbar-nav" style="margin-right: 150px;">
@@ -38,14 +38,14 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="width: 200px; padding-left: 10px;">
                         <li routerLinkActive="active" *ngIf="userconnected">
-                            <a routerLink="favoriterecipes" class="nav-item nav-link">Mes Recettes favorites</a>
+                            <a routerLink="favoriterecipes" class="nav-item nav-link">Mes recettes favorites</a>
                         </li>
                         <li routerLinkActive="active" *ngIf="userconnected">
-                            <a routerLink="dashboard" class="nav-item nav-link">Dashboard</a>
+                            <a routerLink="dashboard" class="nav-item nav-link">Mon compte</a>
                         </li>
                         <li class="d-flex" routerLinkActive="active" *ngIf="userconnected">
                             <a class="nav-item nav-link" (click)="signOut()">
-                                Sign Out
+                                Se déconnecter
                             </a>
                         </li>
                     </ul>

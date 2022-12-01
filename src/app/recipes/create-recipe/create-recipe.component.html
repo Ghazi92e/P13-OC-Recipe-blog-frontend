@@ -14,11 +14,11 @@
     <div class="row justify-content-center" style="margin-top: 80px;">
         <div class="col-md-6">
             <div style="padding-bottom: 50px;">
-                <h3>Ajoutez une recette</h3>
+                <h3>Ajouter une recette</h3>
                 <form [formGroup]="recipeForm" (ngSubmit)="getRecipe()">
                     <div class="form-group">
-                        <label for="title">Title</label>
-                        <input type="title" class="form-control"  style="margin-bottom: 10px;" placeholder="Title" formControlName="title">
+                        <label for="title">Nom</label>
+                        <input type="title" class="form-control"  style="margin-bottom: 10px;" placeholder="Nom de la recette" formControlName="title">
                     </div>
     
                     <div class="form-group">
@@ -35,7 +35,7 @@
                         <!-- <textarea type="description" class="form-control" style="margin-bottom: 10px;" rows="7" placeholder="Description" formControlName="description"></textarea> -->
                     </div>
     
-                    <label for="categories">Categorie</label>
+                    <label for="categories">Catégorie</label>
                     <select class="form-select" formControlName="categories">
                         <option *ngFor="let data of allCategories" [ngValue]="data.id">
                             {{ data.name }}
@@ -43,7 +43,7 @@
                     </select>
     
                     <div class="mb-3" style="margin-top: 10px;">
-                        <label for="formFile" class="form-label">Ajoutez une image</label>
+                        <label for="formFile" class="form-label">Ajouter une image</label>
                         <input class="form-control" type="file" id="formFile" (change)="onChange($event)">
                         <div id="recipeImageHelp" class="form-text">Dimension de l'image 600x800 requis.</div>
                     </div>
